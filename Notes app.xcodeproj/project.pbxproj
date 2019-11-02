@@ -15,6 +15,7 @@
 		9F6C6E77236DC136006E7A52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6C6E76236DC136006E7A52 /* Assets.xcassets */; };
 		9F6C6E7A236DC136006E7A52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F6C6E78236DC136006E7A52 /* LaunchScreen.storyboard */; };
 		9F6C6E85236DC136006E7A52 /* Notes_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E84236DC136006E7A52 /* Notes_appTests.swift */; };
+		9F6C6E95236DC4EB006E7A52 /* NotesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E93236DC4EB006E7A52 /* NotesDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		9F6C6E80236DC136006E7A52 /* Notes appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Notes appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6C6E84236DC136006E7A52 /* Notes_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes_appTests.swift; sourceTree = "<group>"; };
 		9F6C6E86236DC136006E7A52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F6C6E94236DC4EB006E7A52 /* NotesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesDataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		9F6C6E6A236DC135006E7A52 /* Notes app */ = {
 			isa = PBXGroup;
 			children = (
+				9F6C6E92236DC4BB006E7A52 /* Notes DataModel */,
 				9F6C6E6B236DC135006E7A52 /* AppDelegate.swift */,
 				9F6C6E6D236DC135006E7A52 /* SceneDelegate.swift */,
 				9F6C6E6F236DC135006E7A52 /* MasterViewController.swift */,
@@ -100,6 +103,14 @@
 				9F6C6E86236DC136006E7A52 /* Info.plist */,
 			);
 			path = "Notes appTests";
+			sourceTree = "<group>";
+		};
+		9F6C6E92236DC4BB006E7A52 /* Notes DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				9F6C6E93236DC4EB006E7A52 /* NotesDataModel.xcdatamodeld */,
+			);
+			path = "Notes DataModel";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F6C6E95236DC4EB006E7A52 /* NotesDataModel.xcdatamodeld in Sources */,
 				9F6C6E6C236DC135006E7A52 /* AppDelegate.swift in Sources */,
 				9F6C6E6E236DC135006E7A52 /* SceneDelegate.swift in Sources */,
 				9F6C6E70236DC135006E7A52 /* MasterViewController.swift in Sources */,
@@ -368,6 +380,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Notes app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -385,6 +398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Notes app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -469,6 +483,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9F6C6E93236DC4EB006E7A52 /* NotesDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9F6C6E94236DC4EB006E7A52 /* NotesDataModel.xcdatamodel */,
+			);
+			currentVersion = 9F6C6E94236DC4EB006E7A52 /* NotesDataModel.xcdatamodel */;
+			path = NotesDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9F6C6E60236DC135006E7A52 /* Project object */;
 }
