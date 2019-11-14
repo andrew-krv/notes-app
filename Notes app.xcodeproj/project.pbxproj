@@ -16,6 +16,10 @@
 		9F6C6E7A236DC136006E7A52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F6C6E78236DC136006E7A52 /* LaunchScreen.storyboard */; };
 		9F6C6E85236DC136006E7A52 /* Notes_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E84236DC136006E7A52 /* Notes_appTests.swift */; };
 		9F6C6E95236DC4EB006E7A52 /* NotesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E93236DC4EB006E7A52 /* NotesDataModel.xcdatamodeld */; };
+		9FE0906B237D950D000A1467 /* NotesAppDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0906A237D950D000A1467 /* NotesAppDateHelper.swift */; };
+		9FE0906D237D954A000A1467 /* NoteClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0906C237D954A000A1467 /* NoteClass.swift */; };
+		9FE0906F237D9588000A1467 /* NotesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0906E237D9588000A1467 /* NotesStorage.swift */; };
+		9FE09071237D95F1000A1467 /* NotesCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE09070237D95F1000A1467 /* NotesCoreDataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,10 @@
 		9F6C6E84236DC136006E7A52 /* Notes_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes_appTests.swift; sourceTree = "<group>"; };
 		9F6C6E86236DC136006E7A52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F6C6E94236DC4EB006E7A52 /* NotesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesDataModel.xcdatamodel; sourceTree = "<group>"; };
+		9FE0906A237D950D000A1467 /* NotesAppDateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesAppDateHelper.swift; sourceTree = "<group>"; };
+		9FE0906C237D954A000A1467 /* NoteClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteClass.swift; sourceTree = "<group>"; };
+		9FE0906E237D9588000A1467 /* NotesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesStorage.swift; sourceTree = "<group>"; };
+		9FE09070237D95F1000A1467 /* NotesCoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCoreDataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +97,10 @@
 				9F6C6E6F236DC135006E7A52 /* MasterViewController.swift */,
 				9F6C6E71236DC135006E7A52 /* DetailViewController.swift */,
 				9F6C6E73236DC135006E7A52 /* Main.storyboard */,
+				9FE0906A237D950D000A1467 /* NotesAppDateHelper.swift */,
+				9FE0906C237D954A000A1467 /* NoteClass.swift */,
+				9FE0906E237D9588000A1467 /* NotesStorage.swift */,
+				9FE09070237D95F1000A1467 /* NotesCoreDataHelper.swift */,
 				9F6C6E76236DC136006E7A52 /* Assets.xcassets */,
 				9F6C6E78236DC136006E7A52 /* LaunchScreen.storyboard */,
 				9F6C6E7B236DC136006E7A52 /* Info.plist */,
@@ -215,9 +227,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F6C6E95236DC4EB006E7A52 /* NotesDataModel.xcdatamodeld in Sources */,
+				9FE0906B237D950D000A1467 /* NotesAppDateHelper.swift in Sources */,
 				9F6C6E6C236DC135006E7A52 /* AppDelegate.swift in Sources */,
+				9FE0906F237D9588000A1467 /* NotesStorage.swift in Sources */,
 				9F6C6E6E236DC135006E7A52 /* SceneDelegate.swift in Sources */,
+				9FE09071237D95F1000A1467 /* NotesCoreDataHelper.swift in Sources */,
 				9F6C6E70236DC135006E7A52 /* MasterViewController.swift in Sources */,
+				9FE0906D237D954A000A1467 /* NoteClass.swift in Sources */,
 				9F6C6E72236DC135006E7A52 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
