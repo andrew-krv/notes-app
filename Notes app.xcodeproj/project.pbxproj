@@ -91,18 +91,10 @@
 		9F6C6E6A236DC135006E7A52 /* Notes app */ = {
 			isa = PBXGroup;
 			children = (
+				9FCC38E12392B882000E4BA4 /* UI */,
+				9FCC38DE2392B5B6000E4BA4 /* Helpers */,
+				9FCC38DD2392B535000E4BA4 /* Notes ViewModel */,
 				9F6C6E92236DC4BB006E7A52 /* Notes DataModel */,
-				9F6C6E6B236DC135006E7A52 /* AppDelegate.swift */,
-				9F6C6E6D236DC135006E7A52 /* SceneDelegate.swift */,
-				9F6C6E6F236DC135006E7A52 /* MasterViewController.swift */,
-				9F6C6E71236DC135006E7A52 /* DetailViewController.swift */,
-				9F6C6E73236DC135006E7A52 /* Main.storyboard */,
-				9FE0906A237D950D000A1467 /* NotesAppDateHelper.swift */,
-				9FE0906C237D954A000A1467 /* NoteClass.swift */,
-				9FE0906E237D9588000A1467 /* NotesStorage.swift */,
-				9FE09070237D95F1000A1467 /* NotesCoreDataHelper.swift */,
-				9F6C6E76236DC136006E7A52 /* Assets.xcassets */,
-				9F6C6E78236DC136006E7A52 /* LaunchScreen.storyboard */,
 				9F6C6E7B236DC136006E7A52 /* Info.plist */,
 			);
 			path = "Notes app";
@@ -120,9 +112,57 @@
 		9F6C6E92236DC4BB006E7A52 /* Notes DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				9FE0906C237D954A000A1467 /* NoteClass.swift */,
 				9F6C6E93236DC4EB006E7A52 /* NotesDataModel.xcdatamodeld */,
+				9FE0906E237D9588000A1467 /* NotesStorage.swift */,
 			);
 			path = "Notes DataModel";
+			sourceTree = "<group>";
+		};
+		9FCC38DD2392B535000E4BA4 /* Notes ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9FCC38E02392B80D000E4BA4 /* Delegates */,
+				9FCC38DF2392B7F7000E4BA4 /* ViewControllers */,
+			);
+			path = "Notes ViewModel";
+			sourceTree = "<group>";
+		};
+		9FCC38DE2392B5B6000E4BA4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9FE09070237D95F1000A1467 /* NotesCoreDataHelper.swift */,
+				9FE0906A237D950D000A1467 /* NotesAppDateHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		9FCC38DF2392B7F7000E4BA4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9F6C6E71236DC135006E7A52 /* DetailViewController.swift */,
+				9F6C6E6F236DC135006E7A52 /* MasterViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9FCC38E02392B80D000E4BA4 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				9F6C6E6B236DC135006E7A52 /* AppDelegate.swift */,
+				9F6C6E6D236DC135006E7A52 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		9FCC38E12392B882000E4BA4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9F6C6E78236DC136006E7A52 /* LaunchScreen.storyboard */,
+				9F6C6E73236DC135006E7A52 /* Main.storyboard */,
+				9F6C6E76236DC136006E7A52 /* Assets.xcassets */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
