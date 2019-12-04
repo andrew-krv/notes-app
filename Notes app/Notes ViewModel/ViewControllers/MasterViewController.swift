@@ -32,15 +32,9 @@ class MasterViewController: UITableViewController {
 
             return
         }
-        
-        // As we know that container is set up in the AppDelegates so we need to refer that container.
-        // We need to create a context from this container
+
         let managedContext = appDelegate.persistentContainer.viewContext
-        
-        // set context in the storage
         NotesStorage.storage.setManagedContext(managedObjectContext: managedContext)
-        
-        // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = editButtonItem
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
