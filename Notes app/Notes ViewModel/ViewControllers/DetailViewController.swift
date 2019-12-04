@@ -18,8 +18,8 @@ class DetailViewController: UIViewController {
         // Update the user interface for the detail item.
         if let detail = detailItem {
             if let topicLabel = TitleLabel,
-               let dateLabel = NoteTextView,
-               let textView = TimestampLabel {
+               let dateLabel = TimestampLabel,
+               let textView = NoteTextView {
                 topicLabel.text = detail.noteTitle
                 dateLabel.text = NotesAppDateHelper.convertDate(date: Date.init(seconds: detail.noteTimeStamp))
                 textView.text = detail.noteText

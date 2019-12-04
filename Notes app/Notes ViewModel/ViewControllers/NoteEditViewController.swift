@@ -12,8 +12,8 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var TitleTextField: UITextField!
     @IBOutlet weak var NoteTextView: UITextView!
-    @IBOutlet weak var DoneButton: UIButton!
     @IBOutlet weak var Timestamp: UILabel!
+    @IBOutlet weak var DoneNavButton: UIBarButtonItem!
     
     private let noteCreationTimeStamp : Int64 = Date().toSeconds()
     private(set) var changingReallySimpleNote : NoteClass?
@@ -21,18 +21,18 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
     @IBAction func noteTitleChange(_ sender: UITextField, forEvent event:UIEvent) {
            if self.changingReallySimpleNote != nil {
                // change mode
-            DoneButton.isEnabled = true
+            DoneNavButton.isEnabled = true
         } else {
             // create mode
             if ( sender.text?.isEmpty ?? true ) || ( NoteTextView.text?.isEmpty ?? true ) {
-                DoneButton.isEnabled = false
+                DoneNavButton.isEnabled = false
             } else {
-                DoneButton.isEnabled = true
+                DoneNavButton.isEnabled = true
             }
         }
     }
     
-    @IBAction func doneButtonClicked(_ sender: UIButton, forEvent event:UIEvent) {
+    @IBAction func doneButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
         // distinguish change mode and create mode
         if self.changingReallySimpleNote != nil {
             // change mode - change the item
@@ -105,7 +105,7 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
             NoteTextView.text = changingReallySimpleNote.noteText
             TitleTextField.text = changingReallySimpleNote.noteTitle
             // enable done button by default
-            DoneButton.isEnabled = true
+            DoneNavButton.isEnabled = true
         } else {
             // in create mode: set initial time stamp label
             Timestamp.text = NotesAppDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
@@ -126,13 +126,13 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         if self.changingReallySimpleNote != nil {
             // change mode
-            DoneButton.isEnabled = true
+            DoneNavButton.isEnabled = true
         } else {
             // create mode
             if ( TitleTextField.text?.isEmpty ?? true ) || ( textView.text?.isEmpty ?? true ) {
-                DoneButton.isEnabled = false
+                DoneNavButton.isEnabled = false
             } else {
-                DoneButton.isEnabled = true
+                DoneNavButton.isEnabled = true
             }
         }
     }
