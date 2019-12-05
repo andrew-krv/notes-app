@@ -9,11 +9,11 @@
 import UIKit
 
 class NotesListViewController : UITableViewCell {
-    private(set) var Title : String = ""
+    private(set) var Title      : String = ""
     private(set) var NoteLabel  : String = ""
     private(set) var Timestamp  : String = ""
  
-    @IBOutlet weak var TitleLabel: UILabel!
-    @IBOutlet weak var NoteTextLabel: UILabel!
-    @IBOutlet weak var TimestampLabel: UILabel!
+    @IBOutlet weak var TitleLabel       : UILabel!
+    @IBOutlet weak var NoteTextLabel    : UILabel!
+    @IBOutlet weak var TimestampLabel   : UILabel!
 }

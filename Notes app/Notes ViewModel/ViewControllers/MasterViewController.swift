@@ -38,7 +38,12 @@ class MasterViewController: UITableViewController {
             barButtonSystemItem: .add,
             target: self,
             action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
+        let showWeatherButton = UIBarButtonItem(
+            image: UIImage(systemName: "sun.min"),
+            style: .plain,
+            target: self,
+            action: #selector(weatherButtonClicked))
+        navigationItem.rightBarButtonItems = [addButton, showWeatherButton]
 
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -51,10 +56,6 @@ class MasterViewController: UITableViewController {
         super.viewWillAppear(animated)
     }
 
-    @objc
-    func insertNewObject(_ sender: Any) {
-        performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
-    }
     
     // MARK: - Segues
 
@@ -69,6 +70,17 @@ class MasterViewController: UITableViewController {
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
+    }
+    
+    @IBAction func weatherButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
+        performSegue(
+            withIdentifier: "showWeatherForecast",
+            sender: self)
+    }
+
+    @objc
+    func insertNewObject(_ sender: Any) {
+        performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
     }
 
     // MARK: - Table View
