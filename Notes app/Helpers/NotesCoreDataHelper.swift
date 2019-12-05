@@ -55,11 +55,8 @@ class NotesCoreDataHelper {
         noteToBeChanged:        NoteClass,
         inManagedObjectContext: NSManagedObjectContext) {
         
-        // read managed object
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
-        
         let noteIdPredicate = NSPredicate(format: "noteId = %@", noteToBeChanged.noteId as CVarArg)
-        
         fetchRequest.predicate = noteIdPredicate
         
         do {
@@ -109,8 +106,7 @@ class NotesCoreDataHelper {
             // TODO error handling
             print("Could not read. \(error), \(error.userInfo)")
         }
-        
-        // set note count
+
         self.count = returnedNotes.count
         
         return returnedNotes
@@ -146,7 +142,6 @@ class NotesCoreDataHelper {
         fromManagedObjectContext: NSManagedObjectContext) {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
-        
         let noteIdAsCVarArg: CVarArg = noteIdToBeDeleted as CVarArg
         let noteIdPredicate = NSPredicate(format: "noteId == %@", noteIdAsCVarArg)
         

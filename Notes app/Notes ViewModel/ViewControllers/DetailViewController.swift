@@ -15,7 +15,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var NoteTextView: UITextView!
     
     func configureView() {
-        // Update the user interface for the detail item.
         if let detail = detailItem {
             if let topicLabel = TitleLabel,
                let dateLabel = TimestampLabel,
@@ -25,11 +24,13 @@ class DetailViewController: UIViewController {
                 textView.text = detail.noteText
             }
         }
+
+        let EditButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonClicked))
+        navigationItem.rightBarButtonItem = EditButton
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         configureView()
     }
 
@@ -48,6 +49,12 @@ class DetailViewController: UIViewController {
                     changingReallySimpleNote: detail)
             }
         }
+    }
+
+    @IBAction func editButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
+        performSegue(
+            withIdentifier: "showChangeNoteSegue",
+            sender: self)
     }
 }
 

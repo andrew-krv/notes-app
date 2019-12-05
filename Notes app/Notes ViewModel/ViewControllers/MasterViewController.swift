@@ -15,19 +15,16 @@ class MasterViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Core data initialization
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            // create alert
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else {
             let alert = UIAlertController(
                 title: "Could note get app delegate",
                 message: "Could note get app delegate, unexpected error occurred. Try again later.",
                 preferredStyle: .alert)
             
-            // add OK action
             alert.addAction(UIAlertAction(title: "OK",
                                           style: .default))
-            // show alert
             self.present(alert, animated: true)
 
             return
@@ -37,11 +34,15 @@ class MasterViewController: UITableViewController {
         NotesStorage.storage.setManagedContext(managedObjectContext: managedContext)
         navigationItem.leftBarButtonItem = editButtonItem
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+        let addButton = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
+
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers.last as! UINavigationController).topViewController as? DetailViewController
         }
     }
 
@@ -81,7 +82,9 @@ class MasterViewController: UITableViewController {
         return NotesStorage.storage.count()
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(
+            _ tableView: UITableView,
+            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NotesListViewController
 
         if let object = NotesStorage.storage.readNote(at: indexPath.row) {
@@ -99,11 +102,10 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //objects.remove(at: indexPath.row)
             NotesStorage.storage.removeNote(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+            performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
         }
     }
 }
