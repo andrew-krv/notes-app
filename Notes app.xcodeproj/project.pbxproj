@@ -11,7 +11,7 @@
 		9F106D5423930A4500B81A11 /* NotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F106D5323930A4500B81A11 /* NotesListViewController.swift */; };
 		9F6C6E6C236DC135006E7A52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E6B236DC135006E7A52 /* AppDelegate.swift */; };
 		9F6C6E70236DC135006E7A52 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E6F236DC135006E7A52 /* MasterViewController.swift */; };
-		9F6C6E72236DC135006E7A52 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E71236DC135006E7A52 /* DetailViewController.swift */; };
+		9F6C6E72236DC135006E7A52 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E71236DC135006E7A52 /* NoteDetailViewController.swift */; };
 		9F6C6E75236DC135006E7A52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F6C6E73236DC135006E7A52 /* Main.storyboard */; };
 		9F6C6E77236DC136006E7A52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6C6E76236DC136006E7A52 /* Assets.xcassets */; };
 		9F6C6E7A236DC136006E7A52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F6C6E78236DC136006E7A52 /* LaunchScreen.storyboard */; };
@@ -40,7 +40,7 @@
 		9F6C6E68236DC135006E7A52 /* Notes app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notes app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6C6E6B236DC135006E7A52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F6C6E6F236DC135006E7A52 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		9F6C6E71236DC135006E7A52 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9F6C6E71236DC135006E7A52 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 		9F6C6E74236DC135006E7A52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F6C6E76236DC136006E7A52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F6C6E79236DC136006E7A52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,6 +72,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F647B9A239934540083596B /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				9FE09070237D95F1000A1467 /* NotesCoreDataHelper.swift */,
+				9FE0906A237D950D000A1467 /* NotesAppDateHelper.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		9F647B9B239934660083596B /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		9F647B9C239935910083596B /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				9F6C6E71236DC135006E7A52 /* NoteDetailViewController.swift */,
+				9F106D4F2392FC2900B81A11 /* NoteEditViewController.swift */,
+				9F106D5323930A4500B81A11 /* NotesListViewController.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		9F647B9D239935980083596B /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
 		9F6C6E5F236DC135006E7A52 = {
 			isa = PBXGroup;
 			children = (
@@ -131,8 +164,8 @@
 		9FCC38DE2392B5B6000E4BA4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9FE09070237D95F1000A1467 /* NotesCoreDataHelper.swift */,
-				9FE0906A237D950D000A1467 /* NotesAppDateHelper.swift */,
+				9F647B9B239934660083596B /* Weather */,
+				9F647B9A239934540083596B /* Notes */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -140,11 +173,10 @@
 		9FCC38DF2392B7F7000E4BA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				9F647B9D239935980083596B /* Weather */,
+				9F647B9C239935910083596B /* Notes */,
 				9F7D0B2D239720810085ECDF /* PrimarySplitViewController.swift */,
-				9F6C6E71236DC135006E7A52 /* DetailViewController.swift */,
 				9F6C6E6F236DC135006E7A52 /* MasterViewController.swift */,
-				9F106D4F2392FC2900B81A11 /* NoteEditViewController.swift */,
-				9F106D5323930A4500B81A11 /* NotesListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -278,7 +310,7 @@
 				9F106D5423930A4500B81A11 /* NotesListViewController.swift in Sources */,
 				9FE0906D237D954A000A1467 /* NoteClass.swift in Sources */,
 				9F106D502392FC2900B81A11 /* NoteEditViewController.swift in Sources */,
-				9F6C6E72236DC135006E7A52 /* DetailViewController.swift in Sources */,
+				9F6C6E72236DC135006E7A52 /* NoteDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class NoteDetailViewController: UIViewController {
     
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var TimestampLabel: UILabel!

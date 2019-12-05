@@ -25,7 +25,7 @@ class PrimarySplitViewController: UISplitViewController,
         guard let secondaryAsNavController =
             secondaryViewController as? UINavigationController else { return false }
         guard let topAsDetailController =
-            secondaryAsNavController.topViewController as? DetailViewController else { return false }
+            secondaryAsNavController.topViewController as? NoteDetailViewController else { return false }
         if topAsDetailController.detailItem == nil { return true }
         return false
     }

@@ -11,7 +11,7 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: NoteDetailViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class MasterViewController: UITableViewController {
 
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers.last as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers.last as! UINavigationController).topViewController as? NoteDetailViewController
         }
     }
 
@@ -63,7 +63,7 @@ class MasterViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 //let object = objects[indexPath.row]
                 let object = NotesStorage.storage.readNote(at: indexPath.row)
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! NoteDetailViewController
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
