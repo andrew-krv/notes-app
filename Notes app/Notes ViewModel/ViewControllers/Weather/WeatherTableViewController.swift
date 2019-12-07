@@ -17,30 +17,18 @@ class WeatherTableViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let loadingWeather = UIAlertController(title: nil, message: "Loading data", preferredStyle: .alert)
-            
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.medium
-        loadingIndicator.startAnimating();
-
-        loadingWeather.view.addSubview(loadingIndicator)
-        // self.present(loadingWeather, animated: true, completion: nil)
-
         DispatchQueue.main.async {
 
             self.initializeTableContent()
             self.tableView.reloadData()
             
         }
-        // self.dismiss(animated: true, completion: nil)
     }
     
     private func initializeTableContent() {
-        weatherItems = weatherWorker.weatherDataForLocation(
+        weatherWorker.weatherDataForLocation(
             latitude: WeatherDefaults.Latitude,
-            longitude: WeatherDefaults.Longitude) { (error:WeatherWebWorkerError? ) in
+            longitude: WeatherDefaults.Longitude) { (data:Array<WeatherClass>?, error:WeatherWebWorkerError? ) in
                 if error != nil {
                     let alert = UIAlertController(
                         title: "Error",
@@ -51,15 +39,23 @@ class WeatherTableViewController : UITableViewController {
                                                   style: .default))
                     self.present(alert, animated: true)
                     return
+                } else {
+                    if let weatherItemFromWeb = data {
+                        self.weatherItems = weatherItemFromWeb
+                        //this is to perform data transfer (asynchronously) to the main thread in order to update UI
+                        DispatchQueue.main.sync {
+                            self.tableView.reloadData()
+                        }
+                    }
                 }
             }
     }
+    
+    func stopLoadingAndReset () {
+        tableView.reloadData()
+    }
 
     // MARK: - Table View
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return objects.count
@@ -86,6 +82,11 @@ class WeatherTableViewController : UITableViewController {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // Doing nothing in case of editing
+        return
     }
 }
 

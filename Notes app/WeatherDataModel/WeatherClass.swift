@@ -29,7 +29,7 @@ class WeatherClass {
         weatherWindDirection:String,
         weatherWindSpeed:Double,
         weatherPreview:UIImage
-        ) {
+        ) throws {
         self.weatherDate            = weatherDate
         self.weatherTemperature     = weatherTemperature
         self.weatherStatus          = weatherStatus
@@ -39,7 +39,7 @@ class WeatherClass {
     }
     
     init(json:[String: Any], timeType:String) throws {
-        
+        print(json)
         switch timeType {
         case "currently":
             guard let weatherTemperature = json["apparentTemperature"] as? Double else {
@@ -66,8 +66,8 @@ class WeatherClass {
             
             self.weatherTemperature     = weatherTemperature
         case "daily":
-            guard let weatherTemperature = json["temperature"] as? Double else {
-            throw SerializationError.missing("temperature is missing")}
+            guard let weatherTemperature = json["temperatureHigh"] as? Double else {
+            throw SerializationError.missing("temperatureHigh is missing")}
             
             guard let weatherTime = json["time"] as? Double else {
             throw SerializationError.missing("apparentTemperature is missing")}
