@@ -18,7 +18,7 @@ struct WeatherDefaults {
 struct WeatherWebAPI {
 
     static let APIKey = "23c7cfc9f7a80e48661c82513defce10"
-    static let BaseURL = URL(string: "https://api.forecast.io/forecast/")!
+    static let BaseURL = URL(string: "https://api.darksky.net/forecast/")!
 
     static var AuthenticatedBaseURL: URL {
         return BaseURL.appendingPathComponent(APIKey)

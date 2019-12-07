@@ -18,14 +18,22 @@ enum WeatherWebWorkerError: Error {
 
 final class WeatherWebWorker {
 
-    typealias WeatherDataCompletion = (AnyObject?, WeatherWebWorkerError?) -> ()
+    typealias WeatherDataCompletion = (WeatherWebWorkerError?) -> ()
 
     let baseURL: URL
+    private var timeType: String
+    private var weatherItems: Array<WeatherClass>
 
     // MARK: - Initialization
 
-    init(baseURL: URL) {
+    init(baseURL: URL, timeType: String) {
         self.baseURL = baseURL
+        self.timeType = timeType
+        self.weatherItems = [WeatherClass]()
+    }
+    
+    func resetTimeType(timeType: String) {
+        self.timeType = timeType
     }
 
     // MARK: - Requesting Data
@@ -33,7 +41,7 @@ final class WeatherWebWorker {
     func weatherDataForLocation(
         latitude: Double,
         longitude: Double,
-        completion: @escaping WeatherDataCompletion) {
+        completion: @escaping WeatherDataCompletion) -> Array<WeatherClass> {
         // Create URL
         let URL = baseURL.appendingPathComponent("\(latitude),\(longitude)")
 
@@ -41,6 +49,8 @@ final class WeatherWebWorker {
         URLSession.shared.dataTask(with: URL) { (data, response, error) in
             self.didFetchWeatherData(data: data, response: response, error: error, completion: completion)
             }.resume()
+        
+        return weatherItems
     }
 
     // MARK: - Helper Methods
@@ -51,26 +61,34 @@ final class WeatherWebWorker {
         error: Error?,
         completion: @escaping WeatherDataCompletion) {
         if let _ = error {
-            completion(nil, .FailedRequest)
+            completion(.FailedRequest)
 
         } else if let data = data, let response = response as? HTTPURLResponse {
             if response.statusCode == 200 {
                 processWeatherData(data: data, completion: completion)
             } else {
-                completion(nil, .FailedRequest)
+                completion(.FailedRequest)
             }
 
         } else {
-            completion(nil, .Unknown)
+            completion(.Unknown)
         }
     }
 
     private func processWeatherData(data: Data, completion: @escaping WeatherDataCompletion) {
-        if let JSON = try? JSONSerialization.jsonObject(with: data, options: []) as AnyObject {
-            completion(JSON, nil)
-        } else {
-            completion(nil, .InvalidResponse)
+        if let JSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
+            if let dailyForecasts = JSON[self.timeType] as? [String:Any] {
+                if let dailyData = dailyForecasts["data"] as? [[String: Any]] {
+                    for dataPoint in dailyData {
+                        if let weatherObject = try? WeatherClass(json: dataPoint, timeType: timeType){
+                            weatherItems.append(weatherObject)
+                        }
+                    }
+                    completion(nil)
+                } else {
+                    completion(.InvalidResponse)
+                }
+            }
         }
     }
-
 }

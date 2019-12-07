@@ -98,12 +98,16 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         NoteTextView.delegate = self
         
         if let changingReallySimpleNote = self.changingReallySimpleNote {
-            Timestamp.text = NotesAppDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+            Timestamp.text = NotesAppDateHelper.convertDate(
+                date: Date.init(seconds: noteCreationTimeStamp),
+                dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
             NoteTextView.text = changingReallySimpleNote.noteText
             TitleTextField.text = changingReallySimpleNote.noteTitle
             DoneButton.isEnabled = false
         } else {
-            Timestamp.text = NotesAppDateHelper.convertDate(date: Date.init(seconds: noteCreationTimeStamp))
+            Timestamp.text = NotesAppDateHelper.convertDate(
+                date: Date.init(seconds: noteCreationTimeStamp),
+                dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
         }
         
         NoteTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor

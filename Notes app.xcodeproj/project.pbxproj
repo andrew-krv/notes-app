@@ -155,12 +155,12 @@
 		9F6C6E6A236DC135006E7A52 /* Notes app */ = {
 			isa = PBXGroup;
 			children = (
-				9F2B2A922399ABCC0036548E /* WeatherWebWork */,
-				9F2B2A8F2399A09E0036548E /* WeatherDataModel */,
-				9FCC38E12392B882000E4BA4 /* UI */,
 				9FCC38DE2392B5B6000E4BA4 /* Helpers */,
-				9FCC38DD2392B535000E4BA4 /* Notes ViewModel */,
 				9F6C6E92236DC4BB006E7A52 /* Notes DataModel */,
+				9FCC38DD2392B535000E4BA4 /* Notes ViewModel */,
+				9FCC38E12392B882000E4BA4 /* UI */,
+				9F2B2A8F2399A09E0036548E /* WeatherDataModel */,
+				9F2B2A922399ABCC0036548E /* WeatherWebWork */,
 			);
 			path = "Notes app";
 			sourceTree = "<group>";
@@ -443,6 +443,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -496,6 +497,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -516,6 +518,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrii-kryvytskyi.Notes-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = "non-global";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -535,6 +538,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrii-kryvytskyi.Notes-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = "non-global";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

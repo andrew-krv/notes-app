@@ -20,7 +20,9 @@ class NoteDetailViewController: UIViewController {
                let dateLabel = TimestampLabel,
                let textView = NoteTextView {
                 topicLabel.text = detail.noteTitle
-                dateLabel.text = NotesAppDateHelper.convertDate(date: Date.init(seconds: detail.noteTimeStamp))
+                dateLabel.text = NotesAppDateHelper.convertDate(
+                    date: Date.init(seconds: detail.noteTimeStamp),
+                    dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
                 textView.text = detail.noteText
             }
         }

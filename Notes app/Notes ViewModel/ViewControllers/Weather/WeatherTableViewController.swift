@@ -11,18 +11,50 @@ import UIKit
 
 class WeatherTableViewController : UITableViewController {
     var weatherItems: Array<WeatherClass> = Array()
+    private let weatherWorker = WeatherWebWorker(
+        baseURL: WeatherWebAPI.AuthenticatedBaseURL,
+        timeType:  "daily")
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let loadingWeather = UIAlertController(title: nil, message: "Loading data", preferredStyle: .alert)
+            
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating();
+
+        loadingWeather.view.addSubview(loadingIndicator)
+        // self.present(loadingWeather, animated: true, completion: nil)
+
+        DispatchQueue.main.async {
+
+            self.initializeTableContent()
+            self.tableView.reloadData()
+            
+        }
+        // self.dismiss(animated: true, completion: nil)
+    }
     
-//    let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-//
-//    let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-//    loadingIndicator.hidesWhenStopped = true
-//    loadingIndicator.style = UIActivityIndicatorView.Style.gray
-//    loadingIndicator.startAnimating();
-//
-//    alert.view.addSubview(loadingIndicator)
-//    present(alert, animated: true, completion: nil)
-    
+    private func initializeTableContent() {
+        weatherItems = weatherWorker.weatherDataForLocation(
+            latitude: WeatherDefaults.Latitude,
+            longitude: WeatherDefaults.Longitude) { (error:WeatherWebWorkerError? ) in
+                if error != nil {
+                    let alert = UIAlertController(
+                        title: "Error",
+                        message: "\(error!)",
+                        preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "OK",
+                                                  style: .default))
+                    self.present(alert, animated: true)
+                    return
+                }
+            }
+    }
+
     // MARK: - Table View
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -31,35 +63,30 @@ class WeatherTableViewController : UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return objects.count
-        return NotesStorage.storage.count()
+        return weatherItems.count
     }
 
     override func tableView(
             _ tableView: UITableView,
             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NotesListViewController
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! WeatherListViewController
 
         if weatherItems.indices.contains(indexPath.row) {
             let object = weatherItems[indexPath.row]
-            cell.TitleLabel!.text = object.noteTitle
-            cell.NoteTextLabel!.text = object.noteText
-            cell.TimestampLabel!.text = NotesAppDateHelper.convertDate(date: Date.init(seconds: object.noteTimeStamp))
+            cell.DateLabel!.text = object.weatherDate
+            cell.TemperatureLabel!.text = "\(object.weatherTemperature)°C"
+            cell.StatusLabel!.text = object.weatherStatus
+            cell.WindDirectionLabel!.text = object.weatherWindDirection
+            cell.WindSpeedLabel!.text = "\(object.weatherWindSpeed)km/h"
+            cell.PreviewImage!.image = object.weatherPreview
         }
         return cell
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
-    }
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            NotesStorage.storage.removeNote(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
-        }
+        return false
     }
 }
+
 

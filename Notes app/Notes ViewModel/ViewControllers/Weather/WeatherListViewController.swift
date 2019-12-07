@@ -16,10 +16,10 @@ class WeatherListViewController : UITableViewCell {
     private(set) var weatherWindSpeed       : String = ""
     private(set) var weatherPreview         : UIImage = UIImage()
     
-    @IBOutlet weak var weatherDateLabel             : UILabel!
-    @IBOutlet weak var weatherTemperatureLabel      : UILabel!
-    @IBOutlet weak var weatherStatusLabel           : UILabel!
-    @IBOutlet weak var weatherWindDirectionLabel    : UILabel!
-    @IBOutlet weak var weatherWindSpeedLabel        : UILabel!
-    @IBOutlet weak var weatherPreviewImage          : UIImageView!
+    @IBOutlet weak var DateLabel             : UILabel!
+    @IBOutlet weak var TemperatureLabel      : UILabel!
+    @IBOutlet weak var StatusLabel           : UILabel!
+    @IBOutlet weak var WindDirectionLabel    : UILabel!
+    @IBOutlet weak var WindSpeedLabel        : UILabel!
+    @IBOutlet weak var PreviewImage          : UIImageView!
 }
