@@ -8,15 +8,33 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class WeatherTableViewController : UITableViewController {
-    var weatherItems: Array<WeatherClass> = Array()
+    private var weatherItems: Array<WeatherClass> = Array()
+    private var location =  CLLocationCoordinate2D()
+
     private let weatherWorker = WeatherWebWorker(
         baseURL: WeatherWebAPI.AuthenticatedBaseURL,
-        timeType:  "daily")
+        timeType:  "hourly")
+
+    @IBOutlet weak var timeTypeSelector: UISegmentedControl!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else {
+            let alert = UIAlertController(
+                title: "Could note get app delegate",
+                message: "Could note get app delegate, unexpected error occurred. Try again later.",
+                preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK",
+                                          style: .default))
+            self.present(alert, animated: true)
+
+            return
+        }
+        location = appDelegate.getLocation()
         DispatchQueue.main.async {
 
             self.initializeTableContent()
@@ -26,9 +44,10 @@ class WeatherTableViewController : UITableViewController {
     }
     
     private func initializeTableContent() {
+        weatherItems.removeAll()
         weatherWorker.weatherDataForLocation(
-            latitude: WeatherDefaults.Latitude,
-            longitude: WeatherDefaults.Longitude) { (data:Array<WeatherClass>?, error:WeatherWebWorkerError? ) in
+            latitude: location.latitude,
+            longitude: location.longitude) { (data:Array<WeatherClass>?, error:WeatherWebWorkerError? ) in
                 if error != nil {
                     let alert = UIAlertController(
                         title: "Error",
@@ -50,10 +69,6 @@ class WeatherTableViewController : UITableViewController {
                 }
             }
     }
-    
-    func stopLoadingAndReset () {
-        tableView.reloadData()
-    }
 
     // MARK: - Table View
 
@@ -72,13 +87,29 @@ class WeatherTableViewController : UITableViewController {
             cell.DateLabel!.text = object.weatherDate
             cell.TemperatureLabel!.text = "\(object.weatherTemperature)°C"
             cell.StatusLabel!.text = object.weatherStatus
-            cell.WindDirectionLabel!.text = object.weatherWindDirection
-            cell.WindSpeedLabel!.text = "\(object.weatherWindSpeed)km/h"
+            cell.HumidityLabel!.text = "Humidity: \(object.weatherHumidity) %"
+            cell.WindLabel!.text = "Wind: \(object.weatherWindDirection) \(Double(round(1000*object.weatherWindSpeed)/1000)) km/h"
             cell.PreviewImage!.image = object.weatherPreview
         }
         return cell
     }
 
+    @IBAction func segmentedControlClicked(_ sender: Any) {
+        switch timeTypeSelector.selectedSegmentIndex {
+        case 0:
+            weatherWorker.resetTimeType(timeType: "daily")
+        case 1:
+            weatherWorker.resetTimeType(timeType: "hourly")
+        default:
+            weatherWorker.resetTimeType(timeType: "daily")
+        }
+        
+        DispatchQueue.main.async {
+            self.initializeTableContent()
+            self.tableView.reloadData()
+        }
+        self.tableView.reloadData()
+    }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
@@ -89,5 +120,7 @@ class WeatherTableViewController : UITableViewController {
         return
     }
 }
+
+// MARK: Segmented Control
 
 

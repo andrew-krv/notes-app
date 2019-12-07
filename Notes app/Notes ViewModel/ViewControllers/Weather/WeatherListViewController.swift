@@ -13,13 +13,14 @@ class WeatherListViewController : UITableViewCell {
     private(set) var weatherTemperature     : String = ""
     private(set) var weatherStatus          : String = ""
     private(set) var weatherWindDirection   : String = ""
-    private(set) var weatherWindSpeed       : String = ""
+    private(set) var weatherWind            : String = ""
+    private(set) var weatherHumidity        : String = ""
     private(set) var weatherPreview         : UIImage = UIImage()
     
-    @IBOutlet weak var DateLabel             : UILabel!
-    @IBOutlet weak var TemperatureLabel      : UILabel!
-    @IBOutlet weak var StatusLabel           : UILabel!
-    @IBOutlet weak var WindDirectionLabel    : UILabel!
-    @IBOutlet weak var WindSpeedLabel        : UILabel!
-    @IBOutlet weak var PreviewImage          : UIImageView!
+    @IBOutlet weak var DateLabel            : UILabel!
+    @IBOutlet weak var TemperatureLabel     : UILabel!
+    @IBOutlet weak var StatusLabel          : UILabel!
+    @IBOutlet weak var WindLabel            : UILabel!
+    @IBOutlet weak var HumidityLabel        : UILabel!
+    @IBOutlet weak var PreviewImage         : UIImageView!
 }

@@ -18,6 +18,7 @@ class WeatherClass {
     private(set) var weatherDate            : String
     private(set) var weatherTemperature     : Double
     private(set) var weatherStatus          : String
+    private(set) var weatherHumidity        : Int
     private(set) var weatherWindDirection   : String
     private(set) var weatherWindSpeed       : Double
     private(set) var weatherPreview         : UIImage
@@ -26,6 +27,7 @@ class WeatherClass {
         weatherDate: String,
         weatherTemperature:Double,
         weatherStatus:String,
+        weatherHumidity:Int,
         weatherWindDirection:String,
         weatherWindSpeed:Double,
         weatherPreview:UIImage
@@ -33,58 +35,18 @@ class WeatherClass {
         self.weatherDate            = weatherDate
         self.weatherTemperature     = weatherTemperature
         self.weatherStatus          = weatherStatus
+        self.weatherHumidity        = weatherHumidity
         self.weatherWindDirection   = weatherWindDirection
         self.weatherWindSpeed       = weatherWindSpeed
         self.weatherPreview         = weatherPreview
     }
     
     init(json:[String: Any], timeType:String) throws {
-        print(json)
-        switch timeType {
-        case "currently":
-            guard let weatherTemperature = json["apparentTemperature"] as? Double else {
-            throw SerializationError.missing("apparentTemperature is missing")}
-            
-            guard let weatherTime = json["time"] as? Double else {
-            throw SerializationError.missing("apparentTemperature is missing")}
-            
-            self.weatherDate = NotesAppDateHelper.convertDate(
-                date: Date.init(timeIntervalSince1970:weatherTime),
-                dateFormat:"EEEE, MMM d, yyyy, hh:mm:ss")
-            
-            self.weatherTemperature     = weatherTemperature
-        case "hourly":
-            guard let weatherTemperature = json["apparentTemperature"] as? Double else {
-            throw SerializationError.missing("apparentTemperature is missing")}
-            
-            guard let weatherTime = json["time"] as? Double else {
-            throw SerializationError.missing("apparentTemperature is missing")}
-            
-            self.weatherDate = NotesAppDateHelper.convertDate(
-                date: Date.init(timeIntervalSince1970:weatherTime),
-                dateFormat:"EEEE, MMM d, yyyy, hh")
-            
-            self.weatherTemperature     = weatherTemperature
-        case "daily":
-            guard let weatherTemperature = json["temperatureHigh"] as? Double else {
-            throw SerializationError.missing("temperatureHigh is missing")}
-            
-            guard let weatherTime = json["time"] as? Double else {
-            throw SerializationError.missing("apparentTemperature is missing")}
-            
-            self.weatherDate = NotesAppDateHelper.convertDate(
-                date: Date.init(timeIntervalSince1970:weatherTime),
-                dateFormat:"EEEE, MMM d, yyyy, hh")
-            
-            self.weatherTemperature     = weatherTemperature
-
-        default:
-            throw SerializationError.missing("label \(timeType) is missing")
-            
-        }
-
         guard let weatherStatus = json["summary"] as? String else {
             throw SerializationError.missing("summary is missing")}
+        
+        guard let weatherHumidity = json["humidity"] as? Double else {
+            throw SerializationError.missing("humidity is missing")}
 
         guard let weatherWindDirection = json["windBearing"] as? Double else {
             throw SerializationError.missing("windBearing is missing")}
@@ -96,11 +58,41 @@ class WeatherClass {
             throw SerializationError.missing(("icon is missing"))
         }
         
+        guard let weatherTime = json["time"] as? Double else {
+            throw SerializationError.missing("time is missing")
+        }
         
         self.weatherStatus          = weatherStatus
+        self.weatherHumidity        = Int(round(weatherHumidity * 100))
         self.weatherWindDirection   = WeatherClass.convertWindDirectionToString(windBearing: weatherWindDirection)
         self.weatherWindSpeed       = weatherWindSpeed * 0.621371 //Convert to km/h
         self.weatherPreview         = WeatherClass.transformStringToIcon(iconString: weatherPreviewString)
+        
+        switch timeType {
+        case "hourly":
+            guard let weatherTemperature = json["apparentTemperature"] as? Double else {
+            throw SerializationError.missing("apparentTemperature is missing")}
+            
+            self.weatherDate = NotesAppDateHelper.convertDate(
+                date: Date.init(timeIntervalSince1970:weatherTime),
+                dateFormat:"HH:mm")
+            
+            self.weatherTemperature     = weatherTemperature - 32
+        case "daily":
+            guard let weatherTemperature = json["temperatureHigh"] as? Double else {
+            throw SerializationError.missing("temperatureHigh is missing")}
+
+            self.weatherDate = NotesAppDateHelper.convertDate(
+                date: Date.init(timeIntervalSince1970:weatherTime),
+                dateFormat:"EEEE")
+            
+            self.weatherTemperature     = weatherTemperature - 32
+
+        default:
+            throw SerializationError.missing("label \(timeType) is missing")
+            
+        }
+        self.weatherTemperature     = round(10 * (self.weatherTemperature) / 10) // convert to celsius
         
     }
     
@@ -133,7 +125,7 @@ class WeatherClass {
     }
     
    static  private func convertWindDirectionToString (windBearing: Double) -> String {
-        let ArrayIndex = Int((windBearing / 22.5) + 0.5)
+        var ArrayIndex = Int((windBearing / 22.5) + 0.5)
 
         let WindDirNames = [
             "N",
@@ -153,7 +145,9 @@ class WeatherClass {
             "NW",
             "NNW"
         ]
-        
+
+        ArrayIndex = ArrayIndex > 15 ? 15 : ArrayIndex
+
         return WindDirNames[ArrayIndex]
     }
     

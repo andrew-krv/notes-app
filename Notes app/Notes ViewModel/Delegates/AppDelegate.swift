@@ -9,13 +9,28 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,  UIWindowSceneDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,  UIWindowSceneDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
+    var location = CLLocationCoordinate2D()
+    private let locationManager = CLLocationManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
         // Override point for customization after application launch.
         guard let window = window else { return false }
         guard let splitViewController = window.rootViewController as? UISplitViewController else { return false }
@@ -91,6 +106,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UIWindowSceneDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    // MARK: Location Maneger
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        location = locValue
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
+    func getLocation() -> CLLocationCoordinate2D {
+        return location
     }
 
 }

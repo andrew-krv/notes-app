@@ -34,6 +34,7 @@ final class WeatherWebWorker {
     
     func resetTimeType(timeType: String) {
         self.timeType = timeType
+        self.weatherItems.removeAll()
     }
 
     // MARK: - Requesting Data
@@ -76,7 +77,7 @@ final class WeatherWebWorker {
     private func processWeatherData(data: Data, completion: @escaping WeatherDataCompletion) {
         
             if let JSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
-            if let dailyForecasts = JSON["daily"] as? [String:Any]{
+            if let dailyForecasts = JSON[timeType] as? [String:Any]{
                 if let dailyData = dailyForecasts["data"] as? [[String: Any]] {
                     for dataPoint in dailyData {
                         if let weatherObject = try? WeatherClass(json: dataPoint, timeType: timeType) {
