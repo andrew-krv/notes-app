@@ -93,7 +93,18 @@ class WeatherTableViewController : UITableViewController {
         }
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return false
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // Doing nothing in case of editing
+        return
+    }
 
+    // MARK: Segmented Control
     @IBAction func segmentedControlClicked(_ sender: Any) {
         switch timeTypeSelector.selectedSegmentIndex {
         case 0:
@@ -110,17 +121,6 @@ class WeatherTableViewController : UITableViewController {
         }
         self.tableView.reloadData()
     }
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return false
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        // Doing nothing in case of editing
-        return
-    }
 }
-
-// MARK: Segmented Control
 
 

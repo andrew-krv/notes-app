@@ -9,7 +9,11 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, UISearchResultsUpdating {
+    private var notesItems: Array<NoteClass> = Array()
+    private var filteredItems: Array<NoteClass> = Array()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var isSearching = false
 
     var detailViewController: NoteDetailViewController? = nil
     
@@ -29,6 +33,12 @@ class MasterViewController: UITableViewController {
 
             return
         }
+        
+        searchController.searchResultsUpdater = self
+//        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        
+        self.tableView.tableHeaderView = searchController.searchBar
 
         let managedContext = appDelegate.persistentContainer.viewContext
         NotesStorage.storage.setManagedContext(managedObjectContext: managedContext)
@@ -49,6 +59,8 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers.last as! UINavigationController).topViewController as? NoteDetailViewController
         }
+        
+        self.fetchNotes()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +68,25 @@ class MasterViewController: UITableViewController {
         super.viewWillAppear(animated)
     }
 
+   
+    // MARK: Core Data
+    
+    private func fetchNotes() {
+        for index in 0...NotesStorage.storage.count() {
+            if let object = NotesStorage.storage.readNote(at: index) {
+                notesItems.append(object)
+            }
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    private func deleteNote(index: Int) {
+        NotesStorage.storage.removeNote(at: index)
+        notesItems.remove(at: index)
+
+        self.tableView.reloadData()
+    }
     
     // MARK: - Segues
 
@@ -84,6 +115,22 @@ class MasterViewController: UITableViewController {
     }
 
     // MARK: - Table View
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+    
+    func filterContentForSearchText(searchText: String) {
+        if !searchText.isEmpty {
+            isSearching = true
+            filteredItems = notesItems.filter { (object: NoteClass) -> Bool in
+                return object.noteTitle.lowercased().contains(searchText.lowercased())
+            }
+        } else {
+            isSearching = false
+        }
+        tableView.reloadData()
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -91,7 +138,7 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return objects.count
-        return NotesStorage.storage.count()
+        return isSearching ? filteredItems.count : notesItems.count
     }
 
     override func tableView(
@@ -99,9 +146,13 @@ class MasterViewController: UITableViewController {
             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NotesListViewController
 
-        if let object = NotesStorage.storage.readNote(at: indexPath.row) {
-        cell.TitleLabel!.text = object.noteTitle
-        cell.NoteTextLabel!.text = object.noteText
+        let notesContainer = isSearching ? filteredItems : notesItems
+        
+        if notesContainer.indices.contains(indexPath.row) {
+            let object = notesContainerg[indexPath.row]
+
+            cell.TitleLabel!.text = object.noteTitle
+            cell.NoteTextLabel!.text = object.noteText
             cell.TimestampLabel!.text = NotesAppDateHelper.convertDate(
                 date: Date.init(seconds: object.noteTimeStamp),
                 dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
@@ -116,8 +167,7 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            NotesStorage.storage.removeNote(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.deleteNote(index: indexPath.row)
         } else if editingStyle == .insert {
             performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
         }
