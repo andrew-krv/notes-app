@@ -35,8 +35,6 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
 
             return
         }
-        
-//        self.tableView.tableHeaderView = searchController.searchBar
 
         let managedContext = appDelegate.persistentContainer.viewContext
         NotesStorage.storage.setManagedContext(managedObjectContext: managedContext)
@@ -95,6 +93,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        searchController.isActive = false
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 //let object = objects[indexPath.row]
@@ -116,8 +115,6 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
     @IBAction func searchButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
         // Create the search controller and specify that it should present its results in this same view
         searchController = UISearchController(searchResultsController: nil)
-
-        // Set any properties (in this case, don't hide the nav bar and don't show the emoji keyboard option)
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
@@ -189,6 +186,8 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
         } else if editingStyle == .insert {
             performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
         }
+
+        searchController.isActive = false
     }
 }
 
