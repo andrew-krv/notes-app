@@ -25,7 +25,7 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         style: .plain,
         target: self,
         action: #selector(doneButtonClicked))
-    private let AttachImage = UIBarButtonItem(
+    private let AttachImageButton = UIBarButtonItem(
         image: UIImage(systemName: "paperclip"),
         style: .plain,
         target: self,
@@ -60,7 +60,7 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        navigationItem.rightBarButtonItems = [DoneButton, AttachImage]
+        navigationItem.rightBarButtonItems = [DoneButton, AttachImageButton]
 
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
@@ -175,6 +175,5 @@ extension NoteEditViewController: ImagePickerDelegate {
 
     func didSelect(image: UIImage?) {
         self.NoteImageView.image = image
-        self.DoneButton.isEnabled = true
     }
 }

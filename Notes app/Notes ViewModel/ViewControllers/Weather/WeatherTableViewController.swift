@@ -17,7 +17,7 @@ class WeatherTableViewController : UITableViewController {
 
     private let weatherWorker = WeatherWebWorker(
         baseURL: WeatherWebAPI.AuthenticatedBaseURL,
-        timeType:  "daily")
+        timeType:  "hourly")
     
     // MARK: viewDidLoad()
     
@@ -46,7 +46,7 @@ class WeatherTableViewController : UITableViewController {
         self.segmentedControl = UISegmentedControl(items: ["Daily weather", "Hourly weather"])
         self.segmentedControl.sizeToFit()
         self.segmentedControl.tintColor = UIColor(red:0.99, green:0.00, blue:0.25, alpha:1.00)
-        self.segmentedControl.selectedSegmentIndex = 0;
+        self.segmentedControl.selectedSegmentIndex = 1;
         self.segmentedControl.addTarget(self, action: #selector(segmentedControlClicked), for: .valueChanged)
         self.navigationItem.titleView = segmentedControl
     }
