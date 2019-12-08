@@ -13,7 +13,9 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
     @IBOutlet weak var TitleTextField: UITextField!
     @IBOutlet weak var NoteTextView: UITextView!
     @IBOutlet weak var Timestamp: UILabel!
+    @IBOutlet weak var NoteImageView: UIImageView!
 
+    var imagePicker: ImagePicker!
     private let noteCreationTimeStamp : Int64 = Date().toSeconds()
     private(set) var changingReallySimpleNote : NoteClass?
     private let DoneButton = UIBarButtonItem(
@@ -21,6 +23,42 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         style: .plain,
         target: self,
         action: #selector(doneButtonClicked))
+    private let AttachImage = UIBarButtonItem(
+        image: UIImage(systemName: "paperclip"),
+        style: .plain,
+        target: self,
+        action: #selector(showImagePicker))
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NoteTextView.delegate = self
+        
+        if let changingReallySimpleNote = self.changingReallySimpleNote {
+            Timestamp.text = NotesAppDateHelper.convertDate(
+                date: Date.init(seconds: noteCreationTimeStamp),
+                dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
+            NoteTextView.text = changingReallySimpleNote.noteText
+            TitleTextField.text = changingReallySimpleNote.noteTitle
+            NoteImageView.image = changingReallySimpleNote.noteImage
+            DoneButton.isEnabled = false
+        } else {
+            Timestamp.text = NotesAppDateHelper.convertDate(
+                date: Date.init(seconds: noteCreationTimeStamp),
+                dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
+        }
+        
+        NoteTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+        NoteTextView.layer.borderWidth = 1.0
+        NoteTextView.layer.cornerRadius = 5
+
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        navigationItem.rightBarButtonItems = [DoneButton, AttachImage]
+
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+    }
 
     @IBAction func noteTitleChange(_ sender: UITextField, forEvent event:UIEvent) {
            if self.changingReallySimpleNote != nil {
@@ -44,15 +82,27 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         }
     }
     
+    @IBAction func showImagePicker(_ sender: UIButton) {
+        self.imagePicker.present(from: sender)
+    }
+    
     func setChangingReallySimpleNote(changingReallySimpleNote : NoteClass) {
         self.changingReallySimpleNote = changingReallySimpleNote
     }
     
     private func addItem() -> Void {
+        var image : UIImage
+        if NoteImageView.image != nil {
+            image = NoteImageView.image!
+        } else {
+            image = UIImage()
+        }
+
         let note = NoteClass(
             noteTitle:     TitleTextField.text!,
             noteText:      NoteTextView.text,
-            noteTimeStamp: noteCreationTimeStamp)
+            noteTimeStamp: noteCreationTimeStamp,
+            noteImage:     image)
 
         NotesStorage.storage.addNote(noteToBeAdded: note)
         
@@ -64,13 +114,20 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
     private func changeItem() -> Void {
 
         if let changingReallySimpleNote = self.changingReallySimpleNote {
+            var image : UIImage
+            if NoteImageView.image != nil {
+                image = NoteImageView.image!
+            } else {
+                image = UIImage()
+            }
 
             NotesStorage.storage.changeNote(
                 noteToBeChanged: NoteClass(
                     noteId:        changingReallySimpleNote.noteId,
                     noteTitle:     TitleTextField.text!,
                     noteText:      NoteTextView.text,
-                    noteTimeStamp: noteCreationTimeStamp)
+                    noteTimeStamp: noteCreationTimeStamp,
+                    noteImage:     image)
             )
             
             performSegue(
@@ -91,34 +148,6 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
             self.present(alert, animated: true)
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        NoteTextView.delegate = self
-        
-        if let changingReallySimpleNote = self.changingReallySimpleNote {
-            Timestamp.text = NotesAppDateHelper.convertDate(
-                date: Date.init(seconds: noteCreationTimeStamp),
-                dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
-            NoteTextView.text = changingReallySimpleNote.noteText
-            TitleTextField.text = changingReallySimpleNote.noteTitle
-            DoneButton.isEnabled = false
-        } else {
-            Timestamp.text = NotesAppDateHelper.convertDate(
-                date: Date.init(seconds: noteCreationTimeStamp),
-                dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
-        }
-        
-        NoteTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
-        NoteTextView.layer.borderWidth = 1.0
-        NoteTextView.layer.cornerRadius = 5
-
-        let backButton = UIBarButtonItem()
-        backButton.title = "Back"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = DoneButton
-    }
 
     func textViewDidChange(_ textView: UITextView) {
         if self.changingReallySimpleNote != nil {
@@ -132,4 +161,12 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         }
     }
 
+}
+
+extension NoteEditViewController: ImagePickerDelegate {
+
+    func didSelect(image: UIImage?) {
+        self.NoteImageView.image = image
+        self.DoneButton.isEnabled = true
+    }
 }

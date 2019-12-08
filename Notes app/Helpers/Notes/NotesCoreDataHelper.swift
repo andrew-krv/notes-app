@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class NotesCoreDataHelper {
     
@@ -42,6 +43,10 @@ class NotesCoreDataHelper {
             noteToBeCreated.noteTimeStamp,
             forKey: "noteTimeStamp")
         
+        newNoteToBeCreated.setValue(
+            (noteToBeCreated.noteImage)?.pngData(),
+            forKey: "noteImage")
+        
         do {
             try intoManagedObjectContext.save()
             count += 1
@@ -75,6 +80,10 @@ class NotesCoreDataHelper {
             noteManagedObjectToBeChanged.setValue(
                 noteToBeChanged.noteTimeStamp,
                 forKey: "noteTimeStamp")
+            
+            noteManagedObjectToBeChanged.setValue(
+                (noteToBeChanged.noteImage)?.pngData(),
+                forKey: "noteImage")
 
             // save
             try inManagedObjectContext.save()
@@ -96,11 +105,17 @@ class NotesCoreDataHelper {
             let fetchedNotesFromCoreData = try fromManagedObjectContext.fetch(fetchRequest)
             fetchedNotesFromCoreData.forEach { (fetchRequestResult) in
                 let noteManagedObjectRead = fetchRequestResult as! NSManagedObject
+                
+                var image = UIImage()
+                if let Data = (noteManagedObjectRead.value(forKey: "noteImage")as? Data) {
+                    image = UIImage(data:Data) ?? UIImage()
+                }
                 returnedNotes.append(NoteClass.init(
                     noteId:        noteManagedObjectRead.value(forKey: "noteId")        as! UUID,
                     noteTitle:     noteManagedObjectRead.value(forKey: "noteTitle")     as! String,
                     noteText:      noteManagedObjectRead.value(forKey: "noteText")      as! String,
-                    noteTimeStamp: noteManagedObjectRead.value(forKey: "noteTimeStamp") as! Int64))
+                    noteTimeStamp: noteManagedObjectRead.value(forKey: "noteTimeStamp") as! Int64,
+                    noteImage:     image))
             }
         } catch let error as NSError {
             // TODO error handling
@@ -125,11 +140,18 @@ class NotesCoreDataHelper {
         do {
             let fetchedNotesFromCoreData = try fromManagedObjectContext.fetch(fetchRequest)
             let noteManagedObjectToBeRead = fetchedNotesFromCoreData[0] as! NSManagedObject
+            
+            var image = UIImage()
+            if let Data = (noteManagedObjectToBeRead.value(forKey: "noteImage")as? Data) {
+                image = UIImage(data:Data) ?? UIImage()
+            }
+
             return NoteClass.init(
                 noteId:        noteManagedObjectToBeRead.value(forKey: "noteId")        as! UUID,
                 noteTitle:     noteManagedObjectToBeRead.value(forKey: "noteTitle")     as! String,
                 noteText:      noteManagedObjectToBeRead.value(forKey: "noteText")      as! String,
-                noteTimeStamp: noteManagedObjectToBeRead.value(forKey: "noteTimeStamp") as! Int64)
+                noteTimeStamp: noteManagedObjectToBeRead.value(forKey: "noteTimeStamp") as! Int64,
+                noteImage:     image)
         } catch let error as NSError {
             // TODO error handling
             print("Could not read. \(error), \(error.userInfo)")

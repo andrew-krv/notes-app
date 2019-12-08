@@ -39,7 +39,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Note Text" translatesAutoresizingMaskIntoConstraints="NO" id="p3x-ht-ury" userLabel="Note Text View">
-                                <rect key="frame" x="16" y="138" width="382" height="641"/>
+                                <rect key="frame" x="16" y="138" width="382" height="367"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -51,18 +51,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-fy-8Vl">
+                                <rect key="frame" x="16" y="513" width="382" height="295"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="382" id="UwI-bI-T3H"/>
+                                    <constraint firstAttribute="height" constant="295" id="ecb-AH-6Vt"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Htf-p3-Je5" firstAttribute="leading" secondItem="HyU-zS-sny" secondAttribute="leading" constant="20" id="6hb-c9-uOK"/>
-                            <constraint firstItem="HyU-zS-sny" firstAttribute="bottom" secondItem="p3x-ht-ury" secondAttribute="bottom" constant="29" id="CNA-R3-Qo6"/>
                             <constraint firstItem="HyU-zS-sny" firstAttribute="trailing" secondItem="aBR-wx-lMO" secondAttribute="trailing" constant="16" id="DaP-Yo-1Ic"/>
                             <constraint firstItem="HyU-zS-sny" firstAttribute="trailing" secondItem="p3x-ht-ury" secondAttribute="trailing" constant="16" id="G1c-Hf-inX"/>
                             <constraint firstItem="aBR-wx-lMO" firstAttribute="leading" secondItem="HyU-zS-sny" secondAttribute="leading" constant="16" id="GpF-Wg-98p"/>
+                            <constraint firstItem="HyU-zS-sny" firstAttribute="bottom" secondItem="5wb-fy-8Vl" secondAttribute="bottom" id="JOb-e8-03V"/>
+                            <constraint firstItem="5wb-fy-8Vl" firstAttribute="leading" secondItem="HyU-zS-sny" secondAttribute="leading" constant="16" id="bHg-9V-J8c"/>
                             <constraint firstItem="p3x-ht-ury" firstAttribute="top" secondItem="aBR-wx-lMO" secondAttribute="bottom" constant="8" id="bYj-CA-xRA"/>
+                            <constraint firstItem="HyU-zS-sny" firstAttribute="trailing" secondItem="5wb-fy-8Vl" secondAttribute="trailing" constant="16" id="o21-Si-DUa"/>
                             <constraint firstItem="aBR-wx-lMO" firstAttribute="top" secondItem="Htf-p3-Je5" secondAttribute="bottom" constant="8" id="q7O-JQ-ZJj"/>
                             <constraint firstItem="HyU-zS-sny" firstAttribute="trailing" secondItem="Htf-p3-Je5" secondAttribute="trailing" constant="20" id="qHJ-KJ-hld"/>
                             <constraint firstItem="p3x-ht-ury" firstAttribute="leading" secondItem="HyU-zS-sny" secondAttribute="leading" constant="16" id="qKP-nq-DWO"/>
+                            <constraint firstItem="5wb-fy-8Vl" firstAttribute="top" secondItem="p3x-ht-ury" secondAttribute="bottom" constant="8" id="u82-Z0-kGZ"/>
                             <constraint firstItem="Htf-p3-Je5" firstAttribute="top" secondItem="HyU-zS-sny" secondAttribute="top" constant="20" id="vus-UD-lYy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HyU-zS-sny"/>
@@ -70,6 +80,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Note Details" id="yvW-pJ-oRe"/>
                     <connections>
+                        <outlet property="NoteImageView" destination="5wb-fy-8Vl" id="XNN-30-SWJ"/>
                         <outlet property="NoteTextView" destination="p3x-ht-ury" id="6fc-BO-6d6"/>
                         <outlet property="TimestampLabel" destination="aBR-wx-lMO" id="mRN-GQ-SfB"/>
                         <outlet property="TitleLabel" destination="Htf-p3-Je5" id="tDw-Xx-DXC"/>
@@ -103,20 +114,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tTd-ca-OZp">
-                                <rect key="frame" x="16" y="82" width="382" height="697"/>
+                                <rect key="frame" x="16" y="138" width="382" height="367"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mw1-UY-irT">
-                                <rect key="frame" x="16" y="58" width="382" height="16"/>
+                                <rect key="frame" x="16" y="114" width="382" height="16"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Note 1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lCv-eb-Ddx">
-                                <rect key="frame" x="16" y="16" width="382" height="34"/>
+                                <rect key="frame" x="16" y="72" width="382" height="34"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -124,17 +135,27 @@
                                     <action selector="noteTitleChange:forEvent:" destination="5lb-I2-B4W" eventType="valueChanged" id="bkY-Iq-d13"/>
                                 </connections>
                             </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ePw-ip-mo1">
+                                <rect key="frame" x="16" y="513" width="382" height="295"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="382" id="wHc-4C-3ra"/>
+                                    <constraint firstAttribute="height" constant="295" id="x7C-4g-1en"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Mw1-UY-irT" firstAttribute="top" secondItem="1Iw-nf-pv0" secondAttribute="top" constant="58" id="8qp-u9-lNm"/>
                             <constraint firstItem="1Iw-nf-pv0" firstAttribute="trailing" secondItem="tTd-ca-OZp" secondAttribute="trailing" constant="16" id="LZ7-uB-qLF"/>
                             <constraint firstItem="Mw1-UY-irT" firstAttribute="leading" secondItem="1Iw-nf-pv0" secondAttribute="leading" constant="16" id="M8u-7A-Rrw"/>
+                            <constraint firstItem="1Iw-nf-pv0" firstAttribute="trailing" secondItem="ePw-ip-mo1" secondAttribute="trailing" constant="16" id="SbK-bb-cTa"/>
+                            <constraint firstItem="1Iw-nf-pv0" firstAttribute="bottom" secondItem="ePw-ip-mo1" secondAttribute="bottom" id="Vdn-hw-oYO"/>
+                            <constraint firstItem="ePw-ip-mo1" firstAttribute="leading" secondItem="1Iw-nf-pv0" secondAttribute="leading" constant="16" id="bib-1C-wTZ"/>
                             <constraint firstItem="lCv-eb-Ddx" firstAttribute="top" secondItem="1Iw-nf-pv0" secondAttribute="top" constant="16" id="dkr-qq-WU7"/>
                             <constraint firstItem="tTd-ca-OZp" firstAttribute="top" secondItem="lCv-eb-Ddx" secondAttribute="bottom" constant="32" id="g6P-PT-HdB"/>
                             <constraint firstItem="1Iw-nf-pv0" firstAttribute="trailing" secondItem="lCv-eb-Ddx" secondAttribute="trailing" constant="16" id="hTf-GZ-Bxx"/>
-                            <constraint firstItem="1Iw-nf-pv0" firstAttribute="bottom" secondItem="tTd-ca-OZp" secondAttribute="bottom" constant="29" id="iXO-te-YnC"/>
                             <constraint firstItem="1Iw-nf-pv0" firstAttribute="trailing" secondItem="Mw1-UY-irT" secondAttribute="trailing" constant="16" id="il0-m6-lGX"/>
+                            <constraint firstItem="ePw-ip-mo1" firstAttribute="top" secondItem="tTd-ca-OZp" secondAttribute="bottom" constant="8" id="mPP-hf-h3v"/>
                             <constraint firstItem="tTd-ca-OZp" firstAttribute="leading" secondItem="1Iw-nf-pv0" secondAttribute="leading" constant="16" id="uTv-yt-dDs"/>
                             <constraint firstItem="lCv-eb-Ddx" firstAttribute="leading" secondItem="1Iw-nf-pv0" secondAttribute="leading" constant="16" id="zCv-r6-bkY"/>
                         </constraints>
@@ -142,6 +163,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="XXO-Fx-g3b"/>
                     <connections>
+                        <outlet property="NoteImageView" destination="ePw-ip-mo1" id="guB-6c-ELq"/>
                         <outlet property="NoteTextView" destination="tTd-ca-OZp" id="cR9-EP-QGf"/>
                         <outlet property="Timestamp" destination="Mw1-UY-irT" id="ePR-sV-xsN"/>
                         <outlet property="TitleTextField" destination="lCv-eb-Ddx" id="K9V-uB-UKq"/>
@@ -358,6 +380,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="uIe-VZ-tdI"/>
         <segue reference="6SR-a4-YFx"/>
-        <segue reference="YyG-id-cfE"/>
+        <segue reference="zOl-H2-tTi"/>
     </inferredMetricsTieBreakers>
 </document>

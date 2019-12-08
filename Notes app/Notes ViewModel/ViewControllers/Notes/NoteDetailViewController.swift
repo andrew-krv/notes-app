@@ -13,17 +13,20 @@ class NoteDetailViewController: UIViewController {
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var TimestampLabel: UILabel!
     @IBOutlet weak var NoteTextView: UITextView!
+    @IBOutlet weak var NoteImageView: UIImageView!
     
     func configureView() {
         if let detail = detailItem {
             if let topicLabel = TitleLabel,
                let dateLabel = TimestampLabel,
-               let textView = NoteTextView {
+               let textView = NoteTextView,
+               let imageView = NoteImageView {
                 topicLabel.text = detail.noteTitle
                 dateLabel.text = NotesAppDateHelper.convertDate(
                     date: Date.init(seconds: detail.noteTimeStamp),
                     dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
                 textView.text = detail.noteText
+                imageView.image = detail.noteImage
             }
         }
 
