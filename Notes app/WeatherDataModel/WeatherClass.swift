@@ -23,6 +23,8 @@ class WeatherClass {
     private(set) var weatherWindSpeed       : Double
     private(set) var weatherPreview         : UIImage
 
+    // MARK: WeatherClass simple constructor
+    
     init(
         weatherDate: String,
         weatherTemperature:Double,
@@ -40,6 +42,8 @@ class WeatherClass {
         self.weatherWindSpeed       = weatherWindSpeed
         self.weatherPreview         = weatherPreview
     }
+    
+    // MARK: WeatherClass simple parsing constructor
     
     init(json:[String: Any], timeType:String) throws {
         guard let weatherStatus = json["summary"] as? String else {
@@ -93,6 +97,8 @@ class WeatherClass {
             
         }
     }
+    
+    // MARK: Helper functions
     
     static private func transformStringToIcon (iconString: String) -> UIImage {
         switch iconString {

@@ -114,20 +114,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tTd-ca-OZp">
-                                <rect key="frame" x="16" y="138" width="382" height="367"/>
+                                <rect key="frame" x="16" y="82" width="382" height="423"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mw1-UY-irT">
-                                <rect key="frame" x="16" y="114" width="382" height="16"/>
+                                <rect key="frame" x="16" y="58" width="382" height="16"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Note 1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lCv-eb-Ddx">
-                                <rect key="frame" x="16" y="72" width="382" height="34"/>
+                                <rect key="frame" x="16" y="16" width="382" height="34"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -254,20 +254,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <segmentedControl key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" id="CVd-4p-zAw">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Weekly"/>
-                                <segment title="Hourly"/>
-                            </segments>
-                            <connections>
-                                <action selector="segmentedControlClicked:" destination="85U-30-tbf" eventType="valueChanged" id="quQ-ez-c0v"/>
-                            </connections>
-                        </segmentedControl>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="199" id="7NH-CH-nBz" customClass="WeatherListViewController" customModule="Notes_app" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="60" width="414" height="199"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="199"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7NH-CH-nBz" id="ve8-uU-W4I">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="199"/>
@@ -353,9 +342,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Weather" id="ew3-fl-EtP"/>
-                    <connections>
-                        <outlet property="timeTypeSelector" destination="CVd-4p-zAw" id="7Xh-Sh-62g"/>
-                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1473.913043478261" y="-631.47321428571422"/>

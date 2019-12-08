@@ -15,6 +15,14 @@ class NoteDetailViewController: UIViewController {
     @IBOutlet weak var NoteTextView: UITextView!
     @IBOutlet weak var NoteImageView: UIImageView!
     
+    // MARK: viewDidLoad()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureView()
+    }
+    
     func configureView() {
         if let detail = detailItem {
             if let topicLabel = TitleLabel,
@@ -33,11 +41,8 @@ class NoteDetailViewController: UIViewController {
         let EditButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonClicked))
         navigationItem.rightBarButtonItem = EditButton
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureView()
-    }
+    
+    // MARK: Show detail
 
     var detailItem: NoteClass? {
         didSet {

@@ -15,6 +15,8 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
     @IBOutlet weak var Timestamp: UILabel!
     @IBOutlet weak var NoteImageView: UIImageView!
 
+    // MARK: imagePicker init
+    
     var imagePicker: ImagePicker!
     private let noteCreationTimeStamp : Int64 = Date().toSeconds()
     private(set) var changingReallySimpleNote : NoteClass?
@@ -28,6 +30,8 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         style: .plain,
         target: self,
         action: #selector(showImagePicker))
+    
+    // MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +64,8 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
 
+    // MARK: Content change
+    
     @IBAction func noteTitleChange(_ sender: UITextField, forEvent event:UIEvent) {
            if self.changingReallySimpleNote != nil {
                // change mode
@@ -162,6 +168,8 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
     }
 
 }
+
+// MARK: imagePicker extension
 
 extension NoteEditViewController: ImagePickerDelegate {
 

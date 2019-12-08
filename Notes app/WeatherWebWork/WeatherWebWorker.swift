@@ -52,7 +52,7 @@ final class WeatherWebWorker {
             }.resume()
     }
 
-    // MARK: - Helper Methods
+    // MARK: - Helper functions
 
     private func didFetchWeatherData(
         data: Data?,

@@ -8,13 +8,6 @@
 
 import Foundation
 
-struct WeatherDefaults {
-
-    static let Latitude: Double = 50.447731
-    static let Longitude: Double = 30.542721
-
-}
-
 struct WeatherWebAPI {
 
     static let APIKey = "23c7cfc9f7a80e48661c82513defce10"

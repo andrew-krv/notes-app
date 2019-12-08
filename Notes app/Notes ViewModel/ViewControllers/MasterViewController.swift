@@ -9,13 +9,15 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController, UISearchResultsUpdating {
+class MasterViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     private var notesItems: Array<NoteClass> = Array()
     private var filteredItems: Array<NoteClass> = Array()
-    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchController = UISearchController(searchResultsController: nil)
     private var isSearching = false
 
     var detailViewController: NoteDetailViewController? = nil
+    
+    // MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +36,10 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             return
         }
         
-        searchController.searchResultsUpdater = self
-//        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
-        
-        self.tableView.tableHeaderView = searchController.searchBar
+//        self.tableView.tableHeaderView = searchController.searchBar
 
         let managedContext = appDelegate.persistentContainer.viewContext
         NotesStorage.storage.setManagedContext(managedObjectContext: managedContext)
-        navigationItem.leftBarButtonItem = editButtonItem
 
         let addButton = UIBarButtonItem(
             barButtonSystemItem: .add,
@@ -53,7 +50,14 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             style: .plain,
             target: self,
             action: #selector(weatherButtonClicked))
+        let searchButton = UIBarButtonItem(
+            image: UIImage(systemName: "magnifyingglass"),
+            style: .plain,
+            target: self,
+            action: #selector(searchButtonClicked))
+
         navigationItem.rightBarButtonItems = [addButton, showWeatherButton]
+        navigationItem.leftBarButtonItems = [editButtonItem, searchButton]
 
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -108,6 +112,20 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             withIdentifier: "showWeatherForecast",
             sender: self)
     }
+    
+    @IBAction func searchButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
+        // Create the search controller and specify that it should present its results in this same view
+        searchController = UISearchController(searchResultsController: nil)
+
+        // Set any properties (in this case, don't hide the nav bar and don't show the emoji keyboard option)
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
+
+        // Make this class the delegate and present the search
+        self.searchController.searchBar.delegate = self
+        present(searchController, animated: true, completion: nil)
+    }
 
     @objc
     func insertNewObject(_ sender: Any) {
@@ -149,7 +167,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         let notesContainer = isSearching ? filteredItems : notesItems
         
         if notesContainer.indices.contains(indexPath.row) {
-            let object = notesContainerg[indexPath.row]
+            let object = notesContainer[indexPath.row]
 
             cell.TitleLabel!.text = object.noteTitle
             cell.NoteTextLabel!.text = object.noteText
