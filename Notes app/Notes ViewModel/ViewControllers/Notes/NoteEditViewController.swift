@@ -45,12 +45,13 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
             NoteTextView.text = changingReallySimpleNote.noteText
             TitleTextField.text = changingReallySimpleNote.noteTitle
             NoteImageView.image = changingReallySimpleNote.noteImage
-            DoneButton.isEnabled = false
         } else {
             Timestamp.text = NotesAppDateHelper.convertDate(
                 date: Date.init(seconds: noteCreationTimeStamp),
                 dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
         }
+
+        DoneButton.isEnabled = false
         
         NoteTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
         NoteTextView.layer.borderWidth = 1.0
@@ -80,6 +81,18 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         }
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        if self.changingReallySimpleNote != nil {
+            DoneButton.isEnabled = true
+        } else {
+            if ( TitleTextField.text?.isEmpty ?? true ) || ( textView.text?.isEmpty ?? true ) {
+                DoneButton.isEnabled = false
+            } else {
+                DoneButton.isEnabled = true
+            }
+        }
+    }
+    
     @IBAction func doneButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
         if self.changingReallySimpleNote != nil {
             changeItem()
@@ -88,8 +101,8 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         }
     }
     
-    @IBAction func showImagePicker(_ sender: UIButton) {
-        self.imagePicker.present(from: sender)
+    @IBAction func showImagePicker(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
+        self.imagePicker.present(from: self.NoteImageView)
     }
     
     func setChangingReallySimpleNote(changingReallySimpleNote : NoteClass) {
@@ -154,19 +167,6 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
             self.present(alert, animated: true)
         }
     }
-
-    func textViewDidChange(_ textView: UITextView) {
-        if self.changingReallySimpleNote != nil {
-            DoneButton.isEnabled = true
-        } else {
-            if ( TitleTextField.text?.isEmpty ?? true ) || ( textView.text?.isEmpty ?? true ) {
-                DoneButton.isEnabled = false
-            } else {
-                DoneButton.isEnabled = true
-            }
-        }
-    }
-
 }
 
 // MARK: imagePicker extension
