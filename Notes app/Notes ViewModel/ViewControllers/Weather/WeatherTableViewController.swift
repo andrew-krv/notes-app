@@ -85,10 +85,10 @@ class WeatherTableViewController : UITableViewController {
         if weatherItems.indices.contains(indexPath.row) {
             let object = weatherItems[indexPath.row]
             cell.DateLabel!.text = object.weatherDate
-            cell.TemperatureLabel!.text = "\(object.weatherTemperature)°C"
+            cell.TemperatureLabel!.text = "\(Int(round(object.weatherTemperature)))°C"
             cell.StatusLabel!.text = object.weatherStatus
             cell.HumidityLabel!.text = "Humidity: \(object.weatherHumidity) %"
-            cell.WindLabel!.text = "Wind: \(object.weatherWindDirection) \(Double(round(1000*object.weatherWindSpeed)/1000)) km/h"
+            cell.WindLabel!.text = "Wind: \(object.weatherWindDirection) \(Double(round(10*object.weatherWindSpeed)/10)) km/h"
             cell.PreviewImage!.image = object.weatherPreview
         }
         return cell

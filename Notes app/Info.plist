@@ -69,8 +69,8 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
-    	<string>Your location is required for weather loading</string>
-    	<key>NSLocationWhenInUseUsageDescription</key>
-    	<string>Your location is required for weather loading</string>
+	<string>Your location is required for weather loading</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is required for weather loading</string>
 </dict>
 </plist>

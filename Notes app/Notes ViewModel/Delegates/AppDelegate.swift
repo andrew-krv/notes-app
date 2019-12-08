@@ -113,7 +113,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UIWindowSceneDelegate, C
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         location = locValue
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     func getLocation() -> CLLocationCoordinate2D {

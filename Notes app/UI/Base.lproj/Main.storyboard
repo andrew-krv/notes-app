@@ -226,6 +226,7 @@
         <!--Weather-->
         <scene sceneID="pOQ-47-9sU">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TG6-tK-8LC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="85U-30-tbf" customClass="WeatherTableViewController" customModule="Notes_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4qy-q8-SAt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -334,7 +335,6 @@
                         <outlet property="timeTypeSelector" destination="CVd-4p-zAw" id="7Xh-Sh-62g"/>
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TG6-tK-8LC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1473.913043478261" y="-631.47321428571422"/>
         </scene>

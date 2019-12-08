@@ -92,8 +92,6 @@ class WeatherClass {
             throw SerializationError.missing("label \(timeType) is missing")
             
         }
-        self.weatherTemperature     = round(10 * (self.weatherTemperature) / 10) // convert to celsius
-        
     }
     
     static private func transformStringToIcon (iconString: String) -> UIImage {
