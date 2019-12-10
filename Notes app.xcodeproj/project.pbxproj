@@ -14,6 +14,7 @@
 		9F2B2A962399AD080036548E /* WeatherWebWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B2A952399AD080036548E /* WeatherWebWorker.swift */; };
 		9F2B2A982399B6F20036548E /* WeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B2A972399B6F20036548E /* WeatherListViewController.swift */; };
 		9F2B2A9A2399C2F30036548E /* WeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B2A992399C2F30036548E /* WeatherTableViewController.swift */; };
+		9F4FA51B239FB2CC00DF594E /* Notes_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4FA51A239FB2CC00DF594E /* Notes_appUITests.swift */; };
 		9F6C6E6C236DC135006E7A52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E6B236DC135006E7A52 /* AppDelegate.swift */; };
 		9F6C6E70236DC135006E7A52 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E6F236DC135006E7A52 /* MasterViewController.swift */; };
 		9F6C6E72236DC135006E7A52 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C6E71236DC135006E7A52 /* NoteDetailViewController.swift */; };
@@ -31,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9F4FA51D239FB2CC00DF594E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F6C6E60236DC135006E7A52 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F6C6E67236DC135006E7A52;
+			remoteInfo = "Notes app";
+		};
 		9F6C6E81236DC136006E7A52 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9F6C6E60236DC135006E7A52 /* Project object */;
@@ -48,6 +56,9 @@
 		9F2B2A952399AD080036548E /* WeatherWebWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherWebWorker.swift; sourceTree = "<group>"; };
 		9F2B2A972399B6F20036548E /* WeatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListViewController.swift; sourceTree = "<group>"; };
 		9F2B2A992399C2F30036548E /* WeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewController.swift; sourceTree = "<group>"; };
+		9F4FA518239FB2CC00DF594E /* Notes appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Notes appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F4FA51A239FB2CC00DF594E /* Notes_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes_appUITests.swift; sourceTree = "<group>"; };
+		9F4FA51C239FB2CC00DF594E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F6C6E68236DC135006E7A52 /* Notes app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notes app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6C6E6B236DC135006E7A52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F6C6E6F236DC135006E7A52 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +78,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9F4FA515239FB2CC00DF594E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F6C6E65236DC135006E7A52 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -99,6 +117,15 @@
 				9F2B2A952399AD080036548E /* WeatherWebWorker.swift */,
 			);
 			path = WeatherWebWork;
+			sourceTree = "<group>";
+		};
+		9F4FA519239FB2CC00DF594E /* Notes appUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9F4FA51A239FB2CC00DF594E /* Notes_appUITests.swift */,
+				9F4FA51C239FB2CC00DF594E /* Info.plist */,
+			);
+			path = "Notes appUITests";
 			sourceTree = "<group>";
 		};
 		9F647B9A239934540083596B /* Notes */ = {
@@ -141,6 +168,7 @@
 			children = (
 				9F6C6E6A236DC135006E7A52 /* Notes app */,
 				9F6C6E83236DC136006E7A52 /* Notes appTests */,
+				9F4FA519239FB2CC00DF594E /* Notes appUITests */,
 				9F6C6E69236DC135006E7A52 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -150,6 +178,7 @@
 			children = (
 				9F6C6E68236DC135006E7A52 /* Notes app.app */,
 				9F6C6E80236DC136006E7A52 /* Notes appTests.xctest */,
+				9F4FA518239FB2CC00DF594E /* Notes appUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -236,6 +265,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9F4FA517239FB2CC00DF594E /* Notes appUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F4FA521239FB2CC00DF594E /* Build configuration list for PBXNativeTarget "Notes appUITests" */;
+			buildPhases = (
+				9F4FA514239FB2CC00DF594E /* Sources */,
+				9F4FA515239FB2CC00DF594E /* Frameworks */,
+				9F4FA516239FB2CC00DF594E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F4FA51E239FB2CC00DF594E /* PBXTargetDependency */,
+			);
+			name = "Notes appUITests";
+			productName = "Notes appUITests";
+			productReference = 9F4FA518239FB2CC00DF594E /* Notes appUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		9F6C6E67236DC135006E7A52 /* Notes app */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F6C6E89236DC136006E7A52 /* Build configuration list for PBXNativeTarget "Notes app" */;
@@ -277,10 +324,14 @@
 		9F6C6E60236DC135006E7A52 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1110;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Andrii Kryvytskyi";
 				TargetAttributes = {
+					9F4FA517239FB2CC00DF594E = {
+						CreatedOnToolsVersion = 11.2.1;
+						TestTargetID = 9F6C6E67236DC135006E7A52;
+					};
 					9F6C6E67236DC135006E7A52 = {
 						CreatedOnToolsVersion = 11.1;
 					};
@@ -305,11 +356,19 @@
 			targets = (
 				9F6C6E67236DC135006E7A52 /* Notes app */,
 				9F6C6E7F236DC136006E7A52 /* Notes appTests */,
+				9F4FA517239FB2CC00DF594E /* Notes appUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9F4FA516239FB2CC00DF594E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F6C6E66236DC135006E7A52 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -330,6 +389,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9F4FA514239FB2CC00DF594E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F4FA51B239FB2CC00DF594E /* Notes_appUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F6C6E64236DC135006E7A52 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -365,6 +432,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9F4FA51E239FB2CC00DF594E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F6C6E67236DC135006E7A52 /* Notes app */;
+			targetProxy = 9F4FA51D239FB2CC00DF594E /* PBXContainerItemProxy */;
+		};
 		9F6C6E82236DC136006E7A52 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9F6C6E67236DC135006E7A52 /* Notes app */;
@@ -392,6 +464,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9F4FA51F239FB2CC00DF594E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 743UWSR384;
+				INFOPLIST_FILE = "Notes appUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andrii-kryvytskyi.Notes-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Notes app";
+			};
+			name = Debug;
+		};
+		9F4FA520239FB2CC00DF594E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 743UWSR384;
+				INFOPLIST_FILE = "Notes appUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andrii-kryvytskyi.Notes-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Notes app";
+			};
+			name = Release;
+		};
 		9F6C6E87236DC136006E7A52 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -593,6 +705,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9F4FA521239FB2CC00DF594E /* Build configuration list for PBXNativeTarget "Notes appUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F4FA51F239FB2CC00DF594E /* Debug */,
+				9F4FA520239FB2CC00DF594E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9F6C6E63236DC135006E7A52 /* Build configuration list for PBXProject "Notes app" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

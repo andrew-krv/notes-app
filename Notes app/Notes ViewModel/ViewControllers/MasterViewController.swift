@@ -12,10 +12,6 @@ import UIKit
 class MasterViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     private var notesItems: Array<NoteClass> = Array()
     private var filteredItems: Array<NoteClass> = Array()
-    private var searchController = UISearchController(searchResultsController: nil)
-    private var isSearching = false
-
-    var detailViewController: NoteDetailViewController? = nil
     
     // MARK: viewDidLoad
     
@@ -62,6 +58,13 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
             detailViewController = (controllers.last as! UINavigationController).topViewController as? NoteDetailViewController
         }
         
+        // Create the search controller and specify that it should present its results in this same view
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Notes"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
         self.fetchNotes()
     }
 
@@ -69,6 +72,21 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
+    
+    // MARK:Search controller
+    
+    private var searchController = UISearchController(searchResultsController: nil)
+    private var isSearchBarEmpty: Bool {
+
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    private var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
+
+    var detailViewController: NoteDetailViewController? = nil
+    
 
    
     // MARK: Core Data
@@ -93,11 +111,12 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        searchController.isActive = false
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 //let object = objects[indexPath.row]
-                let object = NotesStorage.storage.readNote(at: indexPath.row)
+                let notesContainer = isFiltering ? filteredItems : notesItems
+                let object = notesContainer[indexPath.row]
+                tableView.deselectRow(at: indexPath, animated: true)
                 let controller = (segue.destination as! UINavigationController).topViewController as! NoteDetailViewController
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -113,14 +132,6 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
     }
     
     @IBAction func searchButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
-        // Create the search controller and specify that it should present its results in this same view
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchResultsUpdater = self
-
-        // Make this class the delegate and present the search
-        self.searchController.searchBar.delegate = self
         present(searchController, animated: true, completion: nil)
     }
 
@@ -136,13 +147,10 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
     }
     
     func filterContentForSearchText(searchText: String) {
-        if !searchText.isEmpty {
-            isSearching = true
+        if !isSearchBarEmpty {
             filteredItems = notesItems.filter { (object: NoteClass) -> Bool in
                 return object.noteTitle.lowercased().contains(searchText.lowercased())
             }
-        } else {
-            isSearching = false
         }
         tableView.reloadData()
     }
@@ -153,7 +161,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return objects.count
-        return isSearching ? filteredItems.count : notesItems.count
+        return isFiltering ? filteredItems.count : notesItems.count
     }
 
     override func tableView(
@@ -161,7 +169,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NotesListViewController
 
-        let notesContainer = isSearching ? filteredItems : notesItems
+        let notesContainer = isFiltering ? filteredItems : notesItems
         
         if notesContainer.indices.contains(indexPath.row) {
             let object = notesContainer[indexPath.row]
@@ -186,8 +194,6 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
         } else if editingStyle == .insert {
             performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
         }
-
-        searchController.isActive = false
     }
 }
 
