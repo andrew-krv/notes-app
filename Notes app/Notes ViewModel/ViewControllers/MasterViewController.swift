@@ -44,25 +44,19 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
             style: .plain,
             target: self,
             action: #selector(weatherButtonClicked))
-        let searchButton = UIBarButtonItem(
-            image: UIImage(systemName: "magnifyingglass"),
-            style: .plain,
-            target: self,
-            action: #selector(searchButtonClicked))
 
         navigationItem.rightBarButtonItems = [addButton, showWeatherButton]
-        navigationItem.leftBarButtonItems = [editButtonItem, searchButton]
+        navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.searchController = searchController
 
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers.last as! UINavigationController).topViewController as? NoteDetailViewController
         }
-        
-        // Create the search controller and specify that it should present its results in this same view
+
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Notes"
-        navigationItem.searchController = searchController
         definesPresentationContext = true
         
         self.fetchNotes()
@@ -129,10 +123,6 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
         performSegue(
             withIdentifier: "showWeatherForecast",
             sender: self)
-    }
-    
-    @IBAction func searchButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
-        present(searchController, animated: true, completion: nil)
     }
 
     @objc
