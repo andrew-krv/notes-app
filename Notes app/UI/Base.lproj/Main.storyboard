@@ -118,7 +118,7 @@
             </objects>
             <point key="canvasLocation" x="-856" y="-330"/>
         </scene>
-        <!--Note Edit View Controller-->
+        <!--Edit Note-->
         <scene sceneID="5DX-5F-lkx">
             <objects>
                 <viewController id="5lb-I2-B4W" customClass="NoteEditViewController" customModule="Notes_app" customModuleProvider="target" sceneMemberID="viewController">
@@ -127,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tTd-ca-OZp">
-                                <rect key="frame" x="16" y="82" width="382" height="374"/>
+                                <rect key="frame" x="16" y="82" width="382" height="423"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <accessibility key="accessibilityConfiguration" identifier="Note text input"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -151,7 +151,7 @@
                                 </connections>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ePw-ip-mo1">
-                                <rect key="frame" x="16" y="464" width="382" height="295"/>
+                                <rect key="frame" x="16" y="513" width="382" height="295"/>
                                 <accessibility key="accessibilityConfiguration" identifier="Note image attachment">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
@@ -180,7 +180,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Iw-nf-pv0"/>
                     </view>
-                    <navigationItem key="navigationItem" id="XXO-Fx-g3b">
+                    <navigationItem key="navigationItem" title="Edit Note" id="XXO-Fx-g3b">
                         <rightBarButtonItems>
                             <barButtonItem enabled="NO" title="Done" id="P8D-w3-CaT">
                                 <connections>
@@ -226,21 +226,21 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="INk-rW-8QC">
                                             <rect key="frame" x="16" y="16" width="382" height="21"/>
-                                            <accessibility key="accessibilityConfiguration" label="Note Title Lavel"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="Note Title Label"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLn-o8-GA0">
                                             <rect key="frame" x="16" y="44.5" width="382" height="17"/>
-                                            <accessibility key="accessibilityConfiguration" label="Note Text preview"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="Note Text preview"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ve-bW-4Z7">
                                             <rect key="frame" x="16" y="69.5" width="382" height="16"/>
-                                            <accessibility key="accessibilityConfiguration" label="Note timestamp"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="Note timestamp"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -258,7 +258,7 @@
                                         <constraint firstAttribute="trailing" secondItem="INk-rW-8QC" secondAttribute="trailing" constant="16" id="scC-iE-qco"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <accessibility key="accessibilityConfiguration" label="Note cell">
+                                <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                                 <connections>
@@ -279,7 +279,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Notes List" id="dj1-Wp-RNz">
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="plus" catalog="system" landscapeImage="plus" largeContentSizeImage="plus" id="pV5-Mf-dhg">
+                            <barButtonItem title="Add Note" image="plus" catalog="system" landscapeImage="plus" largeContentSizeImage="plus" id="pV5-Mf-dhg">
                                 <connections>
                                     <action selector="insertNewObject:" destination="2wh-ye-GsR" id="SVR-6d-DQa"/>
                                 </connections>
@@ -302,7 +302,7 @@
             </objects>
             <point key="canvasLocation" x="707.24637681159425" y="-630.80357142857144"/>
         </scene>
-        <!--Weather Table View Controller-->
+        <!--Weather-->
         <scene sceneID="pOQ-47-9sU">
             <objects>
                 <tableViewController id="85U-30-tbf" customClass="WeatherTableViewController" customModule="Notes_app" customModuleProvider="target" sceneMemberID="viewController">
@@ -406,9 +406,8 @@
                             <outlet property="delegate" destination="85U-30-tbf" id="JPT-9N-q3a"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ew3-fl-EtP">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="rDB-O1-cKC">
+                    <navigationItem key="navigationItem" title="Weather" id="ew3-fl-EtP">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="rDB-O1-cKC">
                             <rect key="frame" x="93.5" y="5.5" width="227" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
@@ -426,7 +425,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TG6-tK-8LC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="pY6-KM-gAh">
-                    <rect key="frame" x="0.0" y="0.0" width="131" height="31"/>
+                    <rect key="frame" x="0.0" y="-1" width="131" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <segments>
                         <segment title="First"/>
@@ -461,6 +460,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="uIe-VZ-tdI"/>
         <segue reference="6SR-a4-YFx"/>
-        <segue reference="YyG-id-cfE"/>
+        <segue reference="zOl-H2-tTi"/>
     </inferredMetricsTieBreakers>
 </document>

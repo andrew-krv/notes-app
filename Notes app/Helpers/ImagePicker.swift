@@ -24,13 +24,11 @@ open class ImagePicker: NSObject {
         super.init()
 
         self.presentationController = presentationController
-        self.presentationController?.accessibilityLabel = "ImagepickerPresentController"
         self.delegate = delegate
     
         self.pickerController.delegate = self
         self.pickerController.allowsEditing = true
         self.pickerController.mediaTypes = ["public.image"]
-        self.pickerController.accessibilityLabel = "Imagepicker"
     }
     
     private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {

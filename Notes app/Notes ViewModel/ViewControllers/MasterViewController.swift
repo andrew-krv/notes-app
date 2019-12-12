@@ -43,6 +43,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
         }
         
         navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.searchController = searchController
 
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
