@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oJi-FF-eDU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oJi-FF-eDU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,7 +42,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Note Text" translatesAutoresizingMaskIntoConstraints="NO" id="p3x-ht-ury" userLabel="Note Text View">
                                 <rect key="frame" x="16" y="138" width="382" height="367"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <accessibility key="accessibilityConfiguration" label="Note text"/>
+                                <accessibility key="accessibilityConfiguration" label="Note text view"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -84,12 +84,19 @@
                         <viewLayoutGuide key="safeArea" id="HyU-zS-sny"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Note Details" id="yvW-pJ-oRe"/>
+                    <navigationItem key="navigationItem" title="Note Details" id="yvW-pJ-oRe">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="cy3-CS-Smf">
+                            <connections>
+                                <action selector="editButtonClicked:" destination="L6C-aX-9r0" id="tDA-LZ-sRR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="NoteImageView" destination="5wb-fy-8Vl" id="XNN-30-SWJ"/>
                         <outlet property="NoteTextView" destination="p3x-ht-ury" id="6fc-BO-6d6"/>
                         <outlet property="TimestampLabel" destination="aBR-wx-lMO" id="mRN-GQ-SfB"/>
                         <outlet property="TitleLabel" destination="Htf-p3-Je5" id="tDw-Xx-DXC"/>
+                        <outlet property="editNoteButton" destination="cy3-CS-Smf" id="cqE-V3-lKJ"/>
                         <segue destination="5lb-I2-B4W" kind="show" identifier="showChangeNoteSegue" id="zOl-H2-tTi"/>
                     </connections>
                 </viewController>
@@ -120,23 +127,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tTd-ca-OZp">
-                                <rect key="frame" x="16" y="138" width="382" height="367"/>
+                                <rect key="frame" x="16" y="82" width="382" height="374"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <accessibility key="accessibilityConfiguration" label="Note text input"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Note text input"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mw1-UY-irT">
-                                <rect key="frame" x="16" y="114" width="382" height="16"/>
+                                <rect key="frame" x="16" y="58" width="382" height="16"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Note 1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lCv-eb-Ddx">
-                                <rect key="frame" x="16" y="72" width="382" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Note title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lCv-eb-Ddx">
+                                <rect key="frame" x="16" y="16" width="382" height="34"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <accessibility key="accessibilityConfiguration" label="Note title imput"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Note title input"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -144,10 +151,11 @@
                                 </connections>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ePw-ip-mo1">
-                                <rect key="frame" x="16" y="513" width="382" height="295"/>
-                                <accessibility key="accessibilityConfiguration" label="Note image attachment">
+                                <rect key="frame" x="16" y="464" width="382" height="295"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Note image attachment">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="382" id="wHc-4C-3ra"/>
                                     <constraint firstAttribute="height" constant="295" id="x7C-4g-1en"/>
@@ -172,12 +180,27 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Iw-nf-pv0"/>
                     </view>
-                    <navigationItem key="navigationItem" id="XXO-Fx-g3b"/>
+                    <navigationItem key="navigationItem" id="XXO-Fx-g3b">
+                        <rightBarButtonItems>
+                            <barButtonItem enabled="NO" title="Done" id="P8D-w3-CaT">
+                                <connections>
+                                    <action selector="doneButtonClicked:forEvent:" destination="5lb-I2-B4W" id="T7a-9j-Gqe"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Attach" image="paperclip" catalog="system" landscapeImage="paperclip" largeContentSizeImage="paperclip" id="mF8-GI-8u7">
+                                <connections>
+                                    <action selector="showImagePicker:" destination="5lb-I2-B4W" id="3W8-8A-Z5D"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="NoteImageView" destination="ePw-ip-mo1" id="guB-6c-ELq"/>
                         <outlet property="NoteTextView" destination="tTd-ca-OZp" id="cR9-EP-QGf"/>
                         <outlet property="Timestamp" destination="Mw1-UY-irT" id="ePR-sV-xsN"/>
                         <outlet property="TitleTextField" destination="lCv-eb-Ddx" id="K9V-uB-UKq"/>
+                        <outlet property="attachImageButton" destination="mF8-GI-8u7" id="Gtz-WP-0Xn"/>
+                        <outlet property="doneButton" destination="P8D-w3-CaT" id="zKx-7D-RLK"/>
                         <segue destination="2wh-ye-GsR" kind="show" identifier="backToMasterView" id="6SR-a4-YFx"/>
                     </connections>
                 </viewController>
@@ -253,8 +276,25 @@
                             <outlet property="delegate" destination="2wh-ye-GsR" id="ePw-tF-VgP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Notes List" id="dj1-Wp-RNz"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Notes List" id="dj1-Wp-RNz">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="plus" catalog="system" landscapeImage="plus" largeContentSizeImage="plus" id="pV5-Mf-dhg">
+                                <connections>
+                                    <action selector="insertNewObject:" destination="2wh-ye-GsR" id="SVR-6d-DQa"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Weather" image="sun.min" catalog="system" landscapeImage="sun.min" largeContentSizeImage="sun.min" id="mxK-fV-iSa">
+                                <connections>
+                                    <action selector="showWeather:" destination="2wh-ye-GsR" id="cg2-Au-PxX"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addNote" destination="pV5-Mf-dhg" id="Wvk-TG-zW3"/>
+                        <outlet property="showWeather" destination="mxK-fV-iSa" id="hG2-Dd-AnK"/>
                         <segue destination="85U-30-tbf" kind="show" identifier="showWeatherForecast" id="ANd-oQ-MVz"/>
                     </connections>
                 </tableViewController>
@@ -262,7 +302,7 @@
             </objects>
             <point key="canvasLocation" x="707.24637681159425" y="-630.80357142857144"/>
         </scene>
-        <!--Weather-->
+        <!--Weather Table View Controller-->
         <scene sceneID="pOQ-47-9sU">
             <objects>
                 <tableViewController id="85U-30-tbf" customClass="WeatherTableViewController" customModule="Notes_app" customModuleProvider="target" sceneMemberID="viewController">
@@ -366,9 +406,33 @@
                             <outlet property="delegate" destination="85U-30-tbf" id="JPT-9N-q3a"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Weather" id="ew3-fl-EtP"/>
+                    <navigationItem key="navigationItem" id="ew3-fl-EtP">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="rDB-O1-cKC">
+                            <rect key="frame" x="93.5" y="5.5" width="227" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Daily weather"/>
+                                <segment title="Hourly weather"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedControlClicked:" destination="85U-30-tbf" eventType="valueChanged" id="bXY-fq-Czm"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentedControl" destination="rDB-O1-cKC" id="lAN-s0-Iq7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TG6-tK-8LC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="pY6-KM-gAh">
+                    <rect key="frame" x="0.0" y="0.0" width="131" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                </segmentedControl>
             </objects>
             <point key="canvasLocation" x="1473.913043478261" y="-631.47321428571422"/>
         </scene>
@@ -389,9 +453,14 @@
             <point key="canvasLocation" x="-45" y="129"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="paperclip" catalog="system" width="64" height="64"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
+        <image name="sun.min" catalog="system" width="64" height="60"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uIe-VZ-tdI"/>
         <segue reference="6SR-a4-YFx"/>
-        <segue reference="zOl-H2-tTi"/>
+        <segue reference="YyG-id-cfE"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,6 +12,8 @@ import UIKit
 class MasterViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     private var notesItems: Array<NoteClass> = Array()
     private var filteredItems: Array<NoteClass> = Array()
+    @IBOutlet weak var addNote: UIBarButtonItem!
+    @IBOutlet weak var showWeather: UIBarButtonItem!
     
     // MARK: viewDidLoad
     
@@ -35,24 +37,12 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
         let managedContext = appDelegate.persistentContainer.viewContext
         NotesStorage.storage.setManagedContext(managedObjectContext: managedContext)
 
-        let addButton = UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(insertNewObject(_:)))
-        let showWeatherButton = UIBarButtonItem(
-            image: UIImage(systemName: "sun.min"),
-            style: .plain,
-            target: self,
-            action: #selector(weatherButtonClicked))
-
-        navigationItem.rightBarButtonItems = [addButton, showWeatherButton]
-        navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.searchController = searchController
-
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers.last as! UINavigationController).topViewController as? NoteDetailViewController
         }
+        
+        navigationItem.leftBarButtonItem = editButtonItem
 
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -119,14 +109,13 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating, UISe
         }
     }
     
-    @IBAction func weatherButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
+    @IBAction func showWeather(_ sender: UIBarButtonItem) {
         performSegue(
             withIdentifier: "showWeatherForecast",
             sender: self)
     }
-
-    @objc
-    func insertNewObject(_ sender: Any) {
+    
+    @IBAction func insertNewObject(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
     }
 

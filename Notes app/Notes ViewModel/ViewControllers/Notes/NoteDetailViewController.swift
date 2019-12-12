@@ -14,6 +14,7 @@ class NoteDetailViewController: UIViewController {
     @IBOutlet weak var TimestampLabel: UILabel!
     @IBOutlet weak var NoteTextView: UITextView!
     @IBOutlet weak var NoteImageView: UIImageView!
+    @IBOutlet weak var editNoteButton: UIBarButtonItem!
     
     // MARK: viewDidLoad()
     
@@ -37,9 +38,6 @@ class NoteDetailViewController: UIViewController {
                 imageView.image = detail.noteImage
             }
         }
-
-        let EditButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonClicked))
-        navigationItem.rightBarButtonItem = EditButton
     }
     
     // MARK: Show detail
@@ -61,7 +59,7 @@ class NoteDetailViewController: UIViewController {
         }
     }
 
-    @IBAction func editButtonClicked(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
+    @IBAction func editButtonClicked(_ sender: UIBarButtonItem) {
         performSegue(
             withIdentifier: "showChangeNoteSegue",
             sender: self)

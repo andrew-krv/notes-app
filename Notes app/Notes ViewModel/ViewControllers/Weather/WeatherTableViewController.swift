@@ -13,12 +13,12 @@ import CoreLocation
 class WeatherTableViewController : UITableViewController {
     private var weatherItems: Array<WeatherClass> = Array()
     private var location =  CLLocationCoordinate2D()
-    private(set) var segmentedControl: UISegmentedControl = UISegmentedControl()
 
     private let weatherWorker = WeatherWebWorker(
         baseURL: WeatherWebAPI.AuthenticatedBaseURL,
         timeType:  "hourly")
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     // MARK: viewDidLoad()
     
     override func viewDidLoad() {
@@ -42,13 +42,6 @@ class WeatherTableViewController : UITableViewController {
             self.tableView.reloadData()
             
         }
-        
-        self.segmentedControl = UISegmentedControl(items: ["Daily weather", "Hourly weather"])
-        self.segmentedControl.sizeToFit()
-        self.segmentedControl.tintColor = UIColor(red:0.99, green:0.00, blue:0.25, alpha:1.00)
-        self.segmentedControl.selectedSegmentIndex = 1;
-        self.segmentedControl.addTarget(self, action: #selector(segmentedControlClicked), for: .valueChanged)
-        self.navigationItem.titleView = segmentedControl
     }
     
     // MARK: Fetching data

@@ -14,23 +14,15 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
     @IBOutlet weak var NoteTextView: UITextView!
     @IBOutlet weak var Timestamp: UILabel!
     @IBOutlet weak var NoteImageView: UIImageView!
-
+    @IBOutlet weak var attachImageButton: UIBarButtonItem!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
     // MARK: imagePicker init
     
     var imagePicker: ImagePicker!
     private let noteCreationTimeStamp : Int64 = Date().toSeconds()
     private(set) var changingReallySimpleNote : NoteClass?
-    private let DoneButton = UIBarButtonItem(
-        title: "Done",
-        style: .plain,
-        target: self,
-        action: #selector(doneButtonClicked))
-    private let AttachImageButton = UIBarButtonItem(
-        image: UIImage(systemName: "paperclip"),
-        style: .plain,
-        target: self,
-        action: #selector(showImagePicker))
-    
+ 
     // MARK: viewDidLoad
     
     override func viewDidLoad() {
@@ -51,17 +43,13 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
                 dateFormat: "EEEE, MMM d, yyyy, hh:mm:ss")
         }
 
-        DoneButton.isEnabled = false
-        
         NoteTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
         NoteTextView.layer.borderWidth = 1.0
         NoteTextView.layer.cornerRadius = 5
 
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        navigationItem.rightBarButtonItems = [DoneButton, AttachImageButton]
-
+        
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
 
@@ -70,25 +58,25 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
     @IBAction func noteTitleChange(_ sender: UITextField, forEvent event:UIEvent) {
            if self.changingReallySimpleNote != nil {
                // change mode
-            DoneButton.isEnabled = true
+            doneButton.isEnabled = true
         } else {
             // create mode
             if ( sender.text?.isEmpty ?? true ) || ( NoteTextView.text?.isEmpty ?? true ) {
-                DoneButton.isEnabled = false
+                doneButton.isEnabled = false
             } else {
-                DoneButton.isEnabled = true
+                doneButton.isEnabled = true
             }
         }
     }
     
     func textViewDidChange(_ textView: UITextView) {
         if self.changingReallySimpleNote != nil {
-            DoneButton.isEnabled = true
+            doneButton.isEnabled = true
         } else {
             if ( TitleTextField.text?.isEmpty ?? true ) || ( textView.text?.isEmpty ?? true ) {
-                DoneButton.isEnabled = false
+                doneButton.isEnabled = false
             } else {
-                DoneButton.isEnabled = true
+                doneButton.isEnabled = true
             }
         }
     }
@@ -101,7 +89,7 @@ class NoteEditViewController : UIViewController, UITextViewDelegate {
         }
     }
     
-    @IBAction func showImagePicker(_ sender: UIBarButtonItem, forEvent event:UIEvent) {
+    @IBAction func showImagePicker(_ sender: UIBarButtonItem) {
         self.imagePicker.present(from: self.NoteImageView)
     }
     
@@ -175,5 +163,8 @@ extension NoteEditViewController: ImagePickerDelegate {
 
     func didSelect(image: UIImage?) {
         self.NoteImageView.image = image
+        if self.changingReallySimpleNote != nil {
+            doneButton.isEnabled = true
+        }
     }
 }
