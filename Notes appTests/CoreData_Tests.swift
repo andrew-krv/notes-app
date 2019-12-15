@@ -9,7 +9,7 @@
 import XCTest
 @testable import Notes_app
 
-class Notes_appTests: XCTestCase {
+class CoreData_appTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
