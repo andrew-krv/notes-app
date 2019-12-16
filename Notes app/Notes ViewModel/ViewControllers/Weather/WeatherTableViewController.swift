@@ -19,6 +19,7 @@ class WeatherTableViewController : UITableViewController {
         timeType:  "hourly")
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+
     // MARK: viewDidLoad()
     
     override func viewDidLoad() {
@@ -64,7 +65,8 @@ class WeatherTableViewController : UITableViewController {
                 } else {
                     if let weatherItemFromWeb = data {
                         self.weatherItems = weatherItemFromWeb
-                        //this is to perform data transfer (asynchronously) to the main thread in order to update UI
+                        // this is to perform data transfer (asynchronously) to the main thread
+                        // in order to update UI
                         DispatchQueue.main.sync {
                             self.tableView.reloadData()
                         }

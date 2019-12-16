@@ -9,6 +9,9 @@
 import Foundation
 
 struct WeatherWebAPI {
+    
+    static let default_longitude: Double = 50.45466
+    static let default_latitude: Double = 30.5238
 
     static let APIKey = "23c7cfc9f7a80e48661c82513defce10"
     static let BaseURL = URL(string: "https://api.darksky.net/forecast/")!
