@@ -74,7 +74,7 @@ final class WeatherWebWorker {
         }
     }
 
-    private func processWeatherData(data: Data, completion: @escaping WeatherDataCompletion) {
+    func processWeatherData(data: Data, completion: @escaping WeatherDataCompletion) {
         
             if let JSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
             if let dailyForecasts = JSON[timeType] as? [String:Any]{
